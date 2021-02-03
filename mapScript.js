@@ -73,4 +73,7 @@ $.ajax({
     marker = new mapboxgl.Marker().setLngLat(e.lngLat).addTo(map);
     $("#info").text(map.getZoom());
   });
+  $("#init").click(function () {
+    map.flyTo({ center: center, zoom: zoom });
+  });
 });
