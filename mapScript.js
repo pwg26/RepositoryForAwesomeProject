@@ -74,6 +74,7 @@ $.ajax({
   zoom = map.getZoom();
   center = map.getCenter();
   schoolFilter();
+
   //   var loc = [];
   //   var schools =
   //     "https://api.mapbox.com/geocoding/v5/mapbox.places/high school.json?proximity=" +
@@ -144,33 +145,35 @@ $.ajax({
     }
     zoom = map.getZoom();
     center = map.getCenter();
-    map.addSource("school-data", {
-      type: "geojson",
-      data: {
-        type: "Feature",
-        geometry: {
-          type: "MultiPoint",
-          coordinates: schoolLoc,
+    if (!map.getSource("school-data")) {
+      map.addSource("school-data", {
+        type: "geojson",
+        data: {
+          type: "Feature",
+          geometry: {
+            type: "MultiPoint",
+            coordinates: schoolLoc,
+          },
+          properties: {
+            title: "school-data",
+          },
         },
-        properties: {
-          title: "school-data",
+      });
+      console.log("S");
+      map.addLayer({
+        id: "schools",
+        type: "circle",
+        source: "school-data",
+        layout: {
+          visibility: "visible",
         },
-      },
-    });
-    console.log("S");
-    map.addLayer({
-      id: "schools",
-      type: "circle",
-      source: "school-data",
-      layout: {
-        visibility: "visible",
-      },
-      paint: {
-        "circle-radius": 8,
-        "circle-color": "#000000",
-      },
-    });
-    console.log("S", map.getSource("school-data"));
-    console.log("L", map.getLayer("schools"));
+        paint: {
+          "circle-radius": 8,
+          "circle-color": "#000000",
+        },
+      });
+      console.log("S", map.getSource("school-data"));
+      console.log("L", map.getLayer("schools"));
+    }
   });
 });
