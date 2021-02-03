@@ -76,4 +76,39 @@ $.ajax({
   $("#init").click(function () {
     map.flyTo({ center: center, zoom: zoom });
   });
+  map.on("moveend", function (e) {
+    if (e.originalEvent) {
+      return;
+    }
+    zoom = map.getZoom();
+    center = map.getCenter();
+    map.addSource("school-data", {
+      type: "geojson",
+      data: {
+        type: "Feature",
+        geometry: {
+          type: "MultiPoint",
+          coordinates: loc,
+        },
+        properties: {
+          title: "school-data",
+        },
+      },
+    });
+    console.log("S");
+    map.addLayer({
+      id: "schools",
+      type: "circle",
+      source: "school-data",
+      layout: {
+        visibility: "visible",
+      },
+      paint: {
+        "circle-radius": 8,
+        "circle-color": "#000000",
+      },
+    });
+    console.log("S", map.getSource("school-data"));
+    console.log("L", map.getLayer("schools"));
+  });
 });
