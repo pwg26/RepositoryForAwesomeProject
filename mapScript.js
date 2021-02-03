@@ -21,4 +21,11 @@ $.ajax({
     zoom: 11, // starting zoom
     trackResize: true,
   });
+  var cent = new mapboxgl.Marker({ color: "#FF0000" })
+    .setLngLat(response.features[0].center)
+    .addTo(map);
+  var long = response.features[0].center[0];
+  var lat = response.features[0].center[1];
+  var zoom = map.getZoom();
+  var center = map.getCenter();
 });
