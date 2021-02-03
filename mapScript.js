@@ -65,4 +65,12 @@ $.ajax({
     console.log(loc);
     map = map.fitBounds(bounds, { padding: 45 });
   });
+  map.on("click", function (e) {
+    // The event object (e) contains information like the
+    // coordinates of the point on the map that was clicked.
+    console.log(e.lngLat);
+    marker.remove();
+    marker = new mapboxgl.Marker().setLngLat(e.lngLat).addTo(map);
+    $("#info").text(map.getZoom());
+  });
 });
