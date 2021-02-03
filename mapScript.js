@@ -76,6 +76,19 @@ $.ajax({
   $("#init").click(function () {
     map.flyTo({ center: center, zoom: zoom });
   });
+
+  $("#schools").click(function () {
+    var visibility = map.getLayoutProperty("schools", "visibility");
+
+    // toggle layer visibility by changing the layout object's visibility property
+    if (visibility === "visible") {
+      map.setLayoutProperty("schools", "visibility", "none");
+      //this.className = "";
+    } else {
+      //this.className = "active";
+      map.setLayoutProperty("schools", "visibility", "visible");
+    }
+  });
   map.on("moveend", function (e) {
     if (e.originalEvent) {
       return;
