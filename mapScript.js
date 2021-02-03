@@ -75,44 +75,6 @@ $.ajax({
   center = map.getCenter();
   schoolFilter();
 
-  //   var loc = [];
-  //   var schools =
-  //     "https://api.mapbox.com/geocoding/v5/mapbox.places/high school.json?proximity=" +
-  //     long +
-  //     "," +
-  //     lat +
-  //     "&access_token=" +
-  //     apiKey;
-  //   console.log(schools);
-  //   $.ajax({
-  //     url: schools,
-  //     method: "GET",
-  //   }).then(function (response) {
-  //     var bounds = [lat, lat, long, long];
-  //     console.log(response);
-  //     response.features.forEach(function (school) {
-  //       console.log(school.place_name);
-  //       loc.push(school.center);
-  //       //   var schM = new mapboxgl.Marker({ color: "#000000" })
-  //       //     .setLngLat(school.center)
-  //       //     .addTo(map);
-  //       if (school.center[1] > bounds[3]) {
-  //         bounds[3] = school.center[1];
-  //       }
-  //       if (school.center[1] < bounds[1]) {
-  //         bounds[1] = school.center[1];
-  //       }
-  //       if (school.center[0] > bounds[2]) {
-  //         bounds[2] = school.center[0];
-  //       }
-  //       if (school.center[0] < bounds[0]) {
-  //         bounds[0] = school.center[0];
-  //       }
-  //     });
-  //     console.log(loc);
-  //     map = map.fitBounds(bounds, { padding: 45 });
-  //   });
-
   map.on("click", function (e) {
     // The event object (e) contains information like the
     // coordinates of the point on the map that was clicked.
