@@ -1,0 +1,37 @@
+img {
+  width: 500px;
+  height: 500px;
+  background: url(http://goo.gl/vyAs27) no-repeat scroll 0 0;
+}
+
+.searchBar {
+  z-index: 0;
+  margin-top: 15px;
+}
+
+.searchBar {
+  align-items: 0;
+}
+
+span {
+  color: #ee6e73;
+}
+
+.searchHistory {
+  color: white;
+  background-color: #ee6e73;
+}
+
+.favorites {
+  background-color: #ee6e73;
+  color: white;
+}
+
+/* p {
+  background-color: #ee6e73;
+  color: white;
+} */
+
+.modalBTN {
+  background-color: #ee6e73;
+}
