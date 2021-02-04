@@ -89,7 +89,6 @@ $.ajax({
   method: "GET",
 }).then(function (response) {
   console.log(response);
-  var marker = new mapboxgl.Marker();
   mapboxgl.accessToken = apiKey;
   map = new mapboxgl.Map({
     container: "mapLocation",
@@ -103,6 +102,7 @@ $.ajax({
     .addTo(map);
   long = response.features[0].center[0];
   lat = response.features[0].center[1];
+  $(".mapData > p").text("(" + long + ", " + lat + ")");
   zoom = map.getZoom();
   center = map.getCenter();
   schoolFilter();
@@ -110,10 +110,8 @@ $.ajax({
   map.on("click", function (e) {
     // The event object (e) contains information like the
     // coordinates of the point on the map that was clicked.
-
-    marker.remove();
-    marker = new mapboxgl.Marker().setLngLat(e.lngLat).addTo(map);
-    $("#info").text(e.lngLat);
+    console.log(e.lngLat); // has .lng and .lat properties
+    // $(".mapData > p").text(e.lngLat);
   });
 
   $("#init").click(function () {
