@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title></title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="" />
+  </head>
+  <body>
+    <script src="" async defer></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript">
+      // api for list of properties for sale - could be averaged out https://rapidapi.com/apidojo/api/realtor?endpoint=apiendpoint_e259775d-d98e-479f-8440-206d6d4fa892
+      // const settings = {
+      //   async: true,
+      //   crossDomain: true,
+      //   url:
+      //     "https://realtor.p.rapidapi.com/properties/v2/list-for-sale?city=Broomfield&limit=200&offset=0&state_code=CO&age_min=1980&sort=relevance&postal_code=80211&radius=10&age_max=2020",
+      //   method: "GET",
+      //   headers: {
+      //     "x-rapidapi-key":
+      //       "df5268e97cmshe48e4c9ee315bddp136d9djsnbfac66c2f049",
+      //     "x-rapidapi-host": "realtor.p.rapidapi.com",
+      //   },
+      // };
+
+      // $.ajax(settings).done(function (response) {
+      //   console.log(response);
+      // });
+
+      // API for returning number of nearby schools from realator https://rapidapi.com/apidojo/api/realtor?endpoint=apiendpoint_422c25c6-774b-43a0-bfc5-53a9c276b844
+      // takes lat and lon cordinates
+      // const settings = {
+      //   async: true,
+      //   crossDomain: true,
+      //   url:
+      //     "https://realtor.p.rapidapi.com/schools/list-nearby?lon=-114.937021&lat=35.129431",
+      //   method: "GET",
+      //   headers: {
+      //     "x-rapidapi-key":
+      //       "df5268e97cmshe48e4c9ee315bddp136d9djsnbfac66c2f049",
+      //     "x-rapidapi-host": "realtor.p.rapidapi.com",
+      //   },
+      // };
+
+      // $.ajax(settings).done(function (response) {
+      //   console.log(response);
+      // });
+
+      //   US Census API trial
+      var APIkey = "9c2fc26375a5e9fb6d689f41066923c3a7eefec6";
+
+      // City = "Denver";
+
+      var queryURL =
+        "https://api.census.gov/data/2019/acs/acs5/profile?get=NAME,DP02_0068PE&for=state:*&key=" +
+        APIkey;
+
+      $.ajax({
+        url: queryURL,
+        method: "GET",
+      }).then(function (response) {
+        console.log(response);
+      });
+    </script>
+  </body>
+</html>
