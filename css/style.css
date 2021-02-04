@@ -1,0 +1,37 @@
+img {
+  margin-top: ;
+  float: left;
+}
+
+.searchBar {
+  z-index: 0;
+  margin-top: 15px;
+}
+
+/*  search bar input  */
+.searchBar {
+  align-items: 0;
+}
+
+span {
+  color: #ee6e73;
+}
+
+.searchHistory {
+  color: black;
+  background-color: #fff9c4;
+}
+
+.favorites {
+  background-color: #fff9c4;
+  color: black;
+}
+
+.displayText {
+  background-color: #fff9c4;
+  float: right;
+}
+
+.label-icon {
+  color: black;
+}
