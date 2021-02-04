@@ -92,7 +92,7 @@ $.ajax({
   var marker = new mapboxgl.Marker();
   mapboxgl.accessToken = apiKey;
   map = new mapboxgl.Map({
-    container: "map",
+    container: "mapLocation",
     style: "mapbox://styles/mapbox/outdoors-v11", // stylesheet location
     center: response.features[0].center, // starting position [lng, lat]
     zoom: 11, // starting zoom
