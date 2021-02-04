@@ -1,4 +1,4 @@
-$(document).ready(function () {
+$(window).on("load", function () {
   var cityName = "Denver";
   var apiKey =
     "pk.eyJ1IjoiY3pvZWxsZXIiLCJhIjoiY2trb2N0cmRxMDk5eDJ2cGNtNWJtNW43NyJ9.h0-nqul__11A8sAYcrsCGg";
@@ -89,7 +89,6 @@ $(document).ready(function () {
     url: curl,
     method: "GET",
   }).then(function (response) {
-    console.log(response);
     mapboxgl.accessToken = apiKey;
     map = new mapboxgl.Map({
       container: "mapLocation",
