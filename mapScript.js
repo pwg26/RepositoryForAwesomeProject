@@ -47,7 +47,7 @@ function schoolFilter() {
         bounds[0] = school.center[0];
       }
     });
-    console.log(schoolLoc);
+
     map = map.fitBounds(bounds, { padding: 45 });
   });
 }
@@ -121,7 +121,6 @@ $.ajax({
           },
         },
       });
-      console.log("S");
       map.addLayer({
         id: "schools",
         type: "circle",
@@ -134,8 +133,6 @@ $.ajax({
           "circle-color": "#000000",
         },
       });
-      console.log("S", map.getSource("school-data"));
-      console.log("L", map.getLayer("schools"));
     }
   });
 });
