@@ -14,6 +14,38 @@ var zoom;
 var center;
 var schoolLoc;
 
+function checkSchools() {
+  if (!map.getSource("school-data")) {
+    //adds a data source to the map using the coordinates of schools
+    map.addSource("school-data", {
+      type: "geojson",
+      data: {
+        type: "Feature",
+        geometry: {
+          type: "MultiPoint",
+          coordinates: schoolLoc,
+        },
+        properties: {
+          title: "school-data",
+        },
+      },
+    });
+    //uses the data source to add dots to the map in their own layer
+    map.addLayer({
+      id: "school-data",
+      type: "circle",
+      source: "school-data",
+      layout: {
+        visibility: "visible",
+      },
+      paint: {
+        "circle-radius": 8,
+        "circle-color": "#000000",
+      },
+    });
+  }
+}
+
 function schoolFilter() {
   schoolLoc = [];
   var schools =
@@ -78,10 +110,10 @@ $.ajax({
   map.on("click", function (e) {
     // The event object (e) contains information like the
     // coordinates of the point on the map that was clicked.
-    console.log(e.lngLat);
+
     marker.remove();
     marker = new mapboxgl.Marker().setLngLat(e.lngLat).addTo(map);
-    $("#info").text(map.getZoom());
+    $("#info").text(e.lngLat);
   });
 
   $("#init").click(function () {
@@ -94,9 +126,7 @@ $.ajax({
     // toggle layer visibility by changing the layout object's visibility property
     if (visibility === "visible") {
       map.setLayoutProperty("schools", "visibility", "none");
-      //this.className = "";
     } else {
-      //this.className = "active";
       map.setLayoutProperty("schools", "visibility", "visible");
     }
   });
@@ -107,32 +137,6 @@ $.ajax({
     }
     zoom = map.getZoom();
     center = map.getCenter();
-    if (!map.getSource("school-data")) {
-      map.addSource("school-data", {
-        type: "geojson",
-        data: {
-          type: "Feature",
-          geometry: {
-            type: "MultiPoint",
-            coordinates: schoolLoc,
-          },
-          properties: {
-            title: "school-data",
-          },
-        },
-      });
-      map.addLayer({
-        id: "schools",
-        type: "circle",
-        source: "school-data",
-        layout: {
-          visibility: "visible",
-        },
-        paint: {
-          "circle-radius": 8,
-          "circle-color": "#000000",
-        },
-      });
-    }
+    checkSchools();
   });
 });
