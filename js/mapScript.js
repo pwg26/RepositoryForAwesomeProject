@@ -56,13 +56,13 @@ $(window).on("load", function () {
       lat +
       "&access_token=" +
       apiKey;
-    console.log(schools);
+
     $.ajax({
       url: schools,
       method: "GET",
     }).then(function (response) {
       var bounds = [lat, lat, long, long];
-      console.log(response);
+
       response.features.forEach(function (school) {
         console.log(school.place_name);
         schoolLoc.push(school.center);
