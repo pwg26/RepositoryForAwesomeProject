@@ -17,26 +17,24 @@
 <body>
     
 
-
+    <!-- Navbar at top of page -->
     <nav>
         <div class="nav-wrapper navBar">
           <a href="#" class="brand-logo center">Urban El Dorado </a>
           <ul id="nav-mobile" class="left hide-on-med-and-down">
-            <li><a href="sass.html">Sass</a></li>
-            <li><a href="badges.html">Components</a></li>
-            <li><a href="collapsible.html">JavaScript</a></li>
+            <li id="navLink1"><a href="sass.html">Sass</a></li>
+            <li id="navLink2"><a href="badges.html">Components</a></li>
+            <li id="navLink3"><a href="collapsible.html">JavaScript</a></li>
           </ul>
         </div>
-      </nav>
+    </nav>
 
 
 
     <!-- Page Layout here -->
     <div class="row">
-
-            <div class="col s12 m4 l3">
- 
-                <!-- Search bar  -->
+        <div class="col s12 m4 l3">
+                <!-- Search input field -->
                 <nav>
                     <div class="nav-wrapper z-depth-0 searchBar">
                     <form>
@@ -48,82 +46,97 @@
                     </form>
                     </div>
                 </nav>
-
-                <!-- Search dropdown seletor -->
+                <div class="divider"></div>
+                <!-- Search criteria dropdown seletor -->
                 <div class="input-field col s12 dropSearch">
                     <select>
                         <option value="" disabled selected>Search By City or Crime</option>
-                        <option value="1">Search by City</option>
-                        <option value="2">Search by Crime</option>
-                        <option value="3">Search by Schools</option>
+                        <option id="searchByCity" value="1">Search by City</option>
+                        <option id="searchByCrime" value="2">Search by Crime</option>
+                        <option id="searchBySchools" value="3">Search by Schools</option>
                     </select>
                 </div> 
 
                 <!-- Search Favorites -->
                 <ul class="collapsible">
                     <li>
-                        <div class="col s12">
-                            <div class="col s12 card-panel searchHistory">Favorites</div>
-                        </div>
+                        <div class="col s12 card-panel favorites">Favorites</div>
                     </li>
+                    <container id="favoritesDisp">
                     <li>
-                        <div class="collapsible-header"><i class="material-icons">whatshot</i>Favorite 1</div>
+                        <div class="collapsible-header"><i class="material-icons">favorite</i>Favorite 1</div>
                         <div class="collapsible-body"><span>POPULATE DATA FOR THIS SEARCH</span></div>
                     </li>
                     <li>
-                        <div class="collapsible-header"><i class="material-icons">whatshot</i>Favorite 2</div>
+                        <div class="collapsible-header"><i class="material-icons">favorite</i>Favorite 2</div>
                         <div class="collapsible-body"><span>POPULATE DATA FOR THIS SEARCH</span></div>
                     </li>
+                    </container>    
+                </ul>
                 
                 <!-- Search History  -->
-                <table>
-                    <thead>
-                        <tr>
-                            <div class="col s12">
-                            <div class="col s12 card-panel searchHistory">Search History</div>
+                <div class="col s12 card-panel searchHistory">Search History</div>
+                <div class="divider"></div>
+                    <div class="section">
+                        <h6>Section 1</h6>
+                        <p>Stuff</p>
+                    </div>
+                    <div class="divider"></div>
+                    <div class="section">
+                        <h6>Section 2</h6>
+                        <p>Stuff</p>
+                    </div>
+                    <div class="divider"></div>
+                    <div class="section">
+                        <h6>Section 3</h6>
+                        <p>Stuff</p>
+                    </div>  
+                </div>
+            
+        <!-- Row 1 Column 2 - Image, modal, search output -->
+        <div class="col s12 m8 l9">
+                <div>
+                    <!-- This is where map will go  -->
+                    <div class="col s12 m7">
+                        <div class="card">
+                            <div class="card-image" id="mapLocation">
+                            <img src="https://images.unsplash.com/photo-1450977894548-1b13203524f5?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1502&q=80">
                             </div>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>THAT NEIGHBROHOOD</td>
-                            <td>3127 west broke st</td>
-                            <td>etc</td>
-                        </tr>
-                    </tbody>
-                    <tbody>
-                        <tr>
-                            <td>THIS HOUSE</td>
-                            <td>Jellybean</td>
-                            <td>$500,000</td>
-                        </tr>
-                    </tbody>
-                </table>
-                </ul>   
-        </div>
-  
-            <div class="col s12 m8 l9"> <!-- Note that "m8 l9" was added -->
-        
-        <div>
-            <img>
-        </div>
-            <!-- Modal Trigger -->
-            <button data-target="modal1" class="btn modal-trigge modalBtn">Modal</button>
+                            <div class="card-content mapData">
+                            <p>Map will go above.  Possibly populate data here on what is being displayed</p>
+                            </div>
+                            <div class="card-action" id="mapExternalLink">
+                            <a href="#">Link to city websites, crime stats, etc?</a>
+                            </div>
+                        </div>
+                    </div>
 
-        <!-- Modal Structure -->
-            <div id="modal1" class="modal">
-            <div class="modal-content">
-            <h4>Modal Header</h4>
-            <p>A bunch of text</p>
-            </div>
-            <div class="modal-footer">
-            <a href="#!" class="modal-close waves-green btn-flat">Agree</a>
-            </div>
-            </div>
+                    <!-- large display card -->
+                    <div class="row">
+                        <div class="col s12 m5">
+                            <div class="card large displayText">
+                            <span class="white-text">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolorem ipsa mollitia molestias eos laborum, architecto facere delectus corrupti aspernatur nobis libero voluptatum? Sed quisquam fugit quod, repellat quasi at nisi ullam delectus cupiditate ea excepturi, aut pariatur recusandae tempore quia illo adipisci quis? Quam, culpa numquam vel minus perferendis, temporibus dolore perspiciatis maxime odio nobis aperiam nesciunt! Nostrum, facere, minima doloribus error quis, officia nobis consequatur reiciendis magni maxime sequi? Quos, veritatis nisi dignissimos, reprehenderit saepe fugit cupiditate nesciunt accusantium officia quam assumenda eaque molestias cumque repellendus quas, dolore impedit accusamus nobis sint quibusdam eum aut ab aliquid! Excepturi, rerum? Obcaecati quasi, accusantium maxime sapiente suscipit dolorem architecto sit consequuntur animi debitis, error laborum. Saepe, ipsum. Recusandae qui libero adipisci quia non exercitationem debitis, cum unde ratione dolore rem nobis nihil cumque commodi aliquid earum numquam esse corporis eos! Esse cum vitae autem non ullam voluptates totam!
+                            </span>
+                            </div>
+                        </div>
+                    </div>
+                   
+                    <!-- Modal Trigger -->
+                    <button data-target="modal1" class="btn modal-trigge" id="modalBtn">Modal</button>
 
-            </div>
+                    <!-- Modal Structure -->
+                    <div id="modal1" class="modal">
+                        <div class="modal-content">
+                            <h4>Modal Header</h4>
+                            <p id="modalText">A bunch of text</p>
+                        </div>
+                        <div class="modal-footer">
+                            <a href="#!" class="modal-close waves-green btn-flat">Agree</a>
+                        </div>
+                    </div>
+                </div>
         </div>
-
+    </div>
 
 
 
@@ -136,9 +149,10 @@
     $('.collapsible').collapsible();
     $('select').formSelect();
     $('.modal').modal();
+
+
   });
 
-    // $(".searchHistory").text("SEARCH HISTORY")
     
 
 </script>

@@ -1,7 +1,6 @@
 img {
-  width: 500px;
-  height: 500px;
-  background: url(http://goo.gl/vyAs27) no-repeat scroll 0 0;
+  margin-top: ;
+  float: left;
 }
 
 .searchBar {
@@ -9,6 +8,7 @@ img {
   margin-top: 15px;
 }
 
+/*  search bar input  */
 .searchBar {
   align-items: 0;
 }
@@ -18,20 +18,20 @@ span {
 }
 
 .searchHistory {
-  color: white;
-  background-color: #ee6e73;
+  color: black;
+  background-color: #fff9c4;
 }
 
 .favorites {
-  background-color: #ee6e73;
-  color: white;
+  background-color: #fff9c4;
+  color: black;
 }
 
-/* p {
-  background-color: #ee6e73;
-  color: white;
-} */
+.displayText {
+  background-color: #fff9c4;
+  float: right;
+}
 
-.modalBTN {
-  background-color: #ee6e73;
+.label-icon {
+  color: black;
 }
