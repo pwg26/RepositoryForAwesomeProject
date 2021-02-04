@@ -15,6 +15,56 @@ $(window).on("load", function () {
   var center;
   var schoolLoc;
 
+  function setUrl(city) {
+    curl =
+      "https://api.mapbox.com/geocoding/v5/mapbox.places/" +
+      city +
+      ".json?types=place&country=US&access_token=" +
+      apiKey;
+  }
+
+  function init() {
+    setUrl("Denver");
+    $.ajax({
+      url: curl,
+      method: "GET",
+    }).then(function (response) {
+      mapboxgl.accessToken = apiKey;
+      map = new mapboxgl.Map({
+        container: "mapLocation",
+        style: "mapbox://styles/mapbox/outdoors-v11", // stylesheet location
+        center: response.features[0].center, // starting position [lng, lat]
+        zoom: 11, // starting zoom
+        trackResize: true,
+      });
+      var cent = new mapboxgl.Marker({ color: "#FF0000" })
+        .setLngLat(response.features[0].center)
+        .addTo(map);
+      long = response.features[0].center[0];
+      lat = response.features[0].center[1];
+      $(".mapData > p").text("(" + long + ", " + lat + ")");
+      zoom = map.getZoom();
+      center = map.getCenter();
+
+      schoolFilter();
+      map.on("click", function (e) {
+        // The event object (e) contains information like the
+        // coordinates of the point on the map that was clicked.
+        console.log(e.lngLat); // has .lng and .lat properties
+        // $(".mapData > p").text(e.lngLat);
+      });
+
+      map.on("moveend", function (e) {
+        if (e.originalEvent) {
+          return;
+        }
+        zoom = map.getZoom();
+        center = map.getCenter();
+        checkSchools();
+      });
+    });
+  }
+
   function checkSchools() {
     if (!map.getSource("school-data")) {
       //adds a data source to the map using the coordinates of schools
@@ -85,58 +135,28 @@ $(window).on("load", function () {
     });
   }
 
-  $.ajax({
-    url: curl,
-    method: "GET",
-  }).then(function (response) {
-    mapboxgl.accessToken = apiKey;
-    map = new mapboxgl.Map({
-      container: "mapLocation",
-      style: "mapbox://styles/mapbox/outdoors-v11", // stylesheet location
-      center: response.features[0].center, // starting position [lng, lat]
-      zoom: 11, // starting zoom
-      trackResize: true,
-    });
-    var cent = new mapboxgl.Marker({ color: "#FF0000" })
-      .setLngLat(response.features[0].center)
-      .addTo(map);
-    long = response.features[0].center[0];
-    lat = response.features[0].center[1];
-    $(".mapData > p").text("(" + long + ", " + lat + ")");
-    zoom = map.getZoom();
-    center = map.getCenter();
-    schoolFilter();
+  function move(city) {
+    setUrl(city);
+    $.ajax({
+      url: curl,
+      method: "GET",
+    }).then(function (response) {});
+  }
+  init();
 
-    map.on("click", function (e) {
-      // The event object (e) contains information like the
-      // coordinates of the point on the map that was clicked.
-      console.log(e.lngLat); // has .lng and .lat properties
-      // $(".mapData > p").text(e.lngLat);
-    });
+  $("#init").click(function () {
+    map.flyTo({ center: center, zoom: zoom });
+  });
 
-    $("#init").click(function () {
-      map.flyTo({ center: center, zoom: zoom });
-    });
+  $("#schools").click(function () {
+    var visibility = map.getLayoutProperty("schools", "visibility");
 
-    $("#schools").click(function () {
-      var visibility = map.getLayoutProperty("schools", "visibility");
-
-      // toggle layer visibility by changing the layout object's visibility property
-      if (visibility === "visible") {
-        map.setLayoutProperty("schools", "visibility", "none");
-      } else {
-        map.setLayoutProperty("schools", "visibility", "visible");
-      }
-    });
-
-    map.on("moveend", function (e) {
-      if (e.originalEvent) {
-        return;
-      }
-      zoom = map.getZoom();
-      center = map.getCenter();
-      checkSchools();
-    });
+    // toggle layer visibility by changing the layout object's visibility property
+    if (visibility === "visible") {
+      map.setLayoutProperty("schools", "visibility", "none");
+    } else {
+      map.setLayoutProperty("schools", "visibility", "visible");
+    }
   });
 
   $("#searchForm").on("submit", function (event) {
