@@ -1,5 +1,6 @@
+var move;
 $(window).on("load", function () {
-  var cityName = "Denver";
+  var cityName = "Denver, Colorado";
   var apiKey =
     "pk.eyJ1IjoiY3pvZWxsZXIiLCJhIjoiY2trb2N0cmRxMDk5eDJ2cGNtNWJtNW43NyJ9.h0-nqul__11A8sAYcrsCGg";
   var curl =
@@ -58,10 +59,10 @@ $(window).on("load", function () {
         //console.log(e.lngLat); // has .lng and .lat properties
         // $(".mapData > p").text(e.lngLat);
         if (swap) {
-          move("New York");
+          move("New York, New York");
           swap = !swap;
         } else {
-          move("Chicago");
+          move("Chicago, Illinois");
           swap = !swap;
         }
       });
@@ -194,10 +195,11 @@ $(window).on("load", function () {
     cityName = tempCity;
   }
 
-  function move(city) {
+  move = function (city) {
     if (city == cityName) {
       return;
     }
+    console.log(city);
     setUrl(city);
     $.ajax({
       url: curl,
@@ -215,7 +217,7 @@ $(window).on("load", function () {
       //schoolFilter(city);
       //console.log("moved");
     });
-  }
+  };
   init();
 
   $("#init").click(function () {

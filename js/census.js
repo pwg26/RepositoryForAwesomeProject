@@ -29,7 +29,10 @@ var Locationchange = function (userInput) {
     }
     if (arrayplacecity.includes(userInput)) {
       console.log(arraymoney[arrayplacecity.indexOf(userInput)]);
-      $("#city-name").text(userInput);
+      var city = userInput.split(" ");
+      city = city[0] + ", " + city[2];
+      move(city);
+      $("#city-name").text(city);
       $("#income").text(
         "Median Houshold Income: " +
           arraymoney[arrayplacecity.indexOf(userInput)]
