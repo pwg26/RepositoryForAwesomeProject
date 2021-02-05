@@ -16,7 +16,7 @@ $(window).on("load", function () {
   var schoolLoc;
   var centMark;
   var tempCity;
-  var swap = false;
+  var swap = true;
 
   function setUrl(city) {
     curl =
