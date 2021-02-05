@@ -199,7 +199,6 @@ $(window).on("load", function () {
       return;
     }
     setUrl(city);
-    console.log("move");
     $.ajax({
       url: curl,
       method: "GET",
@@ -229,11 +228,5 @@ $(window).on("load", function () {
     } else {
       map.setLayoutProperty("schools", "visibility", "visible");
     }
-  });
-
-  $("#searchForm").on("submit", function (event) {
-    event.preventDefault();
-
-    console.log(event.target, "test");
   });
 });
