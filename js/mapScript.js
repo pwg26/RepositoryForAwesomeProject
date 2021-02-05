@@ -32,7 +32,6 @@ $(window).on("load", function () {
       url: curl,
       method: "GET",
     }).then(function (response) {
-      console.log(mapboxgl);
       mapboxgl.accessToken = apiKey;
       map = new mapboxgl.Map({
         container: "mapLocation",
@@ -41,14 +40,7 @@ $(window).on("load", function () {
         zoom: 11, // starting zoom
         trackResize: true,
       });
-      map.on("load", function () {
-        var test = map.getLayer("poi-label");
-        console.log(map.getStyle());
-        console.log(map.getSource("composite"));
-        console.log("style", map.style);
 
-        console.log(test); //["==",["get","class"],"education"]
-      });
       centMark = new mapboxgl.Marker({ color: "#FF0000" })
         .setLngLat(response.features[0].center)
         .addTo(map);
