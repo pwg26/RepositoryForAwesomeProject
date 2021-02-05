@@ -151,47 +151,81 @@ var Locationchange = function (userInput) {
 $("#searchForm").on("submit", function (event) {
   event.preventDefault();
   var userInput = $("#search").val();
-
-  Locationchange(userInput);
-});
-
-// fuction to populate search history with locally storage values everytime page is re-entered or refreshed from entries in local storage and adds click event to change imput city and run ajax call based off value with user imput
-function initPast() {
-  if (Object.entries(localStorage).length > 0) {
-    for (x = 1; x < Object.entries(localStorage).length + 1; x++) {
-      var Addedsearches = $("<button>");
-      Addedsearches.text(localStorage.getItem([x]));
-      Addedsearches.addClass("btn btn-primary prev-search");
-      Addedsearches.attr("id", [x] + "memory");
-      Addedsearches.attr("location", localStorage.getItem([x]));
-      $("#past-area").prepend(Addedsearches);
-      $(".prev-search").on("click", function () {
-        Locationchange($(this).attr("location"));
-      });
-    }
-  }
-}
-initPast();
-
-// function that addes entries to local storage from user entry, populates the content with the new entry and adds event listener to run ajax call with that users entry
-$("#saveBtn").on("click", function (event) {
-  event.preventDefault();
-  var userInput = $("#search").val();
   if (userInput == "") {
     return;
   }
-
-  Addedsearches = $("<button>");
-  Addedsearches.text(userInput);
-
-  Addedsearches.addClass("btn btn-primary prev-search");
-  Addedsearches.attr("location", userInput);
-
-  $("#past-area").prepend(Addedsearches);
-  $(".prev-search").on("click", function () {
+  passedsearch = $("<button>");
+  passedsearch.addClass("passed");
+  passedsearch.text(userInput);
+  passedsearch.attr("location", userInput);
+  $("#prepend").prepend(passedsearch);
+  $(".passed").on("click", function () {
     Locationchange($(this).attr("location"));
   });
   localStorage.setItem(Object.entries(localStorage).length + 1, userInput);
-
   Locationchange(userInput);
 });
+
+// function that addes entries to local storage from user entry, populates the content with the new entry and adds event listener to run ajax call with that users entry
+// $("#saveBtn").on("click", function (event) {
+//   event.preventDefault();
+//   var userInput = $("#search").val();
+//   if (userInput == "") {
+//     return;
+//   }
+
+//   Addedsearches = $("<button>");
+//   Addedsearches.text(userInput);
+
+//   Addedsearches.addClass("btn btn-primary prev-search");
+//   Addedsearches.attr("location", userInput);
+
+//   $("#past-area").prepend(Addedsearches);
+//   $(".prev-search").on("click", function () {
+//     Locationchange($(this).attr("location"));
+//   });
+//   localStorage.setItem(Object.entries(localStorage).length + 1, userInput);
+
+//   Locationchange(userInput);
+// });
+
+// // fuction to populate search history with locally storage values everytime page is re-entered or refreshed from entries in local storage and adds click event to change imput city and run ajax call based off value with user imput
+// function initPast() {
+//   if (Object.entries(localStorage).length > 0) {
+//     for (x = 1; x < Object.entries(localStorage).length + 1; x++) {
+//       var Addedsearches = $("<button>");
+//       Addedsearches.text(localStorage.getItem([x]));
+//       Addedsearches.addClass("btn btn-primary prev-search");
+//       Addedsearches.attr("id", [x] + "memory");
+//       Addedsearches.attr("location", localStorage.getItem([x]));
+//       $("#past-area").prepend(Addedsearches);
+//       $(".prev-search").on("click", function () {
+//         Locationchange($(this).attr("location"));
+//       });
+//     }
+//   }
+// }
+// initPast();
+
+// // function that addes entries to local storage from user entry, populates the content with the new entry and adds event listener to run ajax call with that users entry
+// $("#saveBtn").on("click", function (event) {
+//   event.preventDefault();
+//   var userInput = $("#search").val();
+//   if (userInput == "") {
+//     return;
+//   }
+
+//   Addedsearches = $("<button>");
+//   Addedsearches.text(userInput);
+
+//   Addedsearches.addClass("btn btn-primary prev-search");
+//   Addedsearches.attr("location", userInput);
+
+//   $("#past-area").prepend(Addedsearches);
+//   $(".prev-search").on("click", function () {
+//     Locationchange($(this).attr("location"));
+//   });
+//   localStorage.setItem(Object.entries(localStorage).length + 1, userInput);
+
+//   Locationchange(userInput);
+// });
