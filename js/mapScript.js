@@ -207,7 +207,10 @@ $(window).on("load", function () {
       long = response.features[0].center[0];
       lat = response.features[0].center[1];
       centMark.setLngLat(response.features[0].center);
-      map.setCenter(response.features[0].center, { form: "set", city: city });
+      map.jumpTo(
+        { center: response.features[0].center, pitch: 0, bearing: 0 },
+        { form: "set", city: city }
+      );
 
       //schoolFilter(city);
       //console.log("moved");
