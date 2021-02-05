@@ -46,7 +46,7 @@ $(window).on("load", function () {
         .addTo(map);
       long = response.features[0].center[0];
       lat = response.features[0].center[1];
-      $(".mapData > p").text("(" + long + ", " + lat + ")");
+
       zoom = map.getZoom();
       center = map.getCenter();
 
@@ -74,7 +74,7 @@ $(window).on("load", function () {
         //console.log(e);
         zoom = map.getZoom();
         center = map.getCenter();
-
+        $(".mapData > p").text("(" + long + ", " + lat + ")");
         if (e.form == "fit") {
           moveHandler();
         } else if (e.form == "set") {
