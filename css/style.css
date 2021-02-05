@@ -32,6 +32,17 @@ span {
   float: right;
 }
 
-.label-icon {
-  color: black;
+.material-icons {
+  color: black !important;
+}
+
+#search {
+  color: black !important;
+}
+.input-field {
+  color: black !important;
+}
+
+#searchRef {
+  color: black !important;
 }
