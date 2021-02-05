@@ -32,13 +32,22 @@ $(window).on("load", function () {
       url: curl,
       method: "GET",
     }).then(function (response) {
+      console.log(mapboxgl);
       mapboxgl.accessToken = apiKey;
       map = new mapboxgl.Map({
         container: "mapLocation",
-        style: "mapbox://styles/mapbox/outdoors-v11", // stylesheet location
+        style: "mapbox://styles/mapbox/streets-v11", // stylesheet location
         center: response.features[0].center, // starting position [lng, lat]
         zoom: 11, // starting zoom
         trackResize: true,
+      });
+      map.on("load", function () {
+        var test = map.getLayer("poi-label");
+        console.log(map.getStyle());
+        console.log(map.getSource("composite"));
+        console.log("style", map.style);
+
+        console.log(test); //["==",["get","class"],"education"]
       });
       centMark = new mapboxgl.Marker({ color: "#FF0000" })
         .setLngLat(response.features[0].center)
@@ -50,27 +59,27 @@ $(window).on("load", function () {
       center = map.getCenter();
 
       schoolFilter();
-      console.log("init");
+      //console.log("init");
       map.on("click", function (e) {
         // The event object (e) contains information like the
         // coordinates of the point on the map that was clicked.
-        console.log(e.lngLat); // has .lng and .lat properties
+        //console.log(e.lngLat); // has .lng and .lat properties
         // $(".mapData > p").text(e.lngLat);
         if (swap) {
           move("New York");
           swap = !swap;
         } else {
-          move("Denver");
+          move("Chicago");
           swap = !swap;
         }
       });
 
       map.on("moveend", function (e) {
-        console.log("moved");
+        //console.log("moved");
         if (e.originalEvent) {
           return;
         }
-        console.log(e);
+        //console.log(e);
         zoom = map.getZoom();
         center = map.getCenter();
 
@@ -179,10 +188,10 @@ $(window).on("load", function () {
           bounds[0] = school.center[0];
         }
       });
-      console.log(bounds);
+      //console.log(bounds);
       tempCity = city;
       map.fitBounds(bounds, { padding: 45 }, { form: "fit" });
-      console.log("fit");
+      //console.log("fit");
     });
   }
 
@@ -203,7 +212,7 @@ $(window).on("load", function () {
       url: curl,
       method: "GET",
     }).then(function (response) {
-      console.log(response);
+      //console.log(response);
       long = response.features[0].center[0];
       lat = response.features[0].center[1];
       centMark.setLngLat(response.features[0].center);
