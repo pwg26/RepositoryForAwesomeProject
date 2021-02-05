@@ -14,6 +14,9 @@ $(window).on("load", function () {
   var zoom;
   var center;
   var schoolLoc;
+  var centMark;
+  var tempCity;
+  var swap = false;
 
   function setUrl(city) {
     curl =
@@ -24,7 +27,7 @@ $(window).on("load", function () {
   }
 
   function init() {
-    setUrl("Denver");
+    setUrl(cityName);
     $.ajax({
       url: curl,
       method: "GET",
@@ -37,7 +40,7 @@ $(window).on("load", function () {
         zoom: 11, // starting zoom
         trackResize: true,
       });
-      var cent = new mapboxgl.Marker({ color: "#FF0000" })
+      centMark = new mapboxgl.Marker({ color: "#FF0000" })
         .setLngLat(response.features[0].center)
         .addTo(map);
       long = response.features[0].center[0];
@@ -47,27 +50,73 @@ $(window).on("load", function () {
       center = map.getCenter();
 
       schoolFilter();
+      console.log("init");
       map.on("click", function (e) {
         // The event object (e) contains information like the
         // coordinates of the point on the map that was clicked.
         console.log(e.lngLat); // has .lng and .lat properties
         // $(".mapData > p").text(e.lngLat);
+        if (swap) {
+          move("New York");
+          swap = !swap;
+        } else {
+          move("Denver");
+          swap = !swap;
+        }
       });
 
       map.on("moveend", function (e) {
+        console.log("moved");
         if (e.originalEvent) {
           return;
         }
+        console.log(e);
         zoom = map.getZoom();
         center = map.getCenter();
-        checkSchools();
+
+        if (e.form == "fit") {
+          moveHandler();
+        } else if (e.form == "set") {
+          schoolFilter(e.city);
+        }
+        //checkSchools();
       });
     });
   }
 
-  function checkSchools() {
+  function checkSchools(city = cityName) {
     if (!map.getSource("school-data")) {
       //adds a data source to the map using the coordinates of schools
+      map.addSource("school-data", {
+        type: "geojson",
+        data: {
+          type: "Feature",
+          geometry: {
+            type: "MultiPoint",
+            coordinates: schoolLoc,
+          },
+          properties: {
+            title: "school-data",
+          },
+        },
+      });
+      //uses the data source to add dots to the map in their own layer
+      map.addLayer({
+        id: "school-data",
+        type: "circle",
+        source: "school-data",
+        layout: {
+          visibility: "visible",
+        },
+        paint: {
+          "circle-radius": 8,
+          "circle-color": "#000000",
+        },
+      });
+    } else if (city != cityName) {
+      map.removeLayer("school-data");
+      map.removeSource("school-data");
+
       map.addSource("school-data", {
         type: "geojson",
         data: {
@@ -97,7 +146,7 @@ $(window).on("load", function () {
     }
   }
 
-  function schoolFilter() {
+  function schoolFilter(city = cityName) {
     schoolLoc = [];
     var schools =
       "https://api.mapbox.com/geocoding/v5/mapbox.places/high school.json?proximity=" +
@@ -130,22 +179,44 @@ $(window).on("load", function () {
           bounds[0] = school.center[0];
         }
       });
-
-      map = map.fitBounds(bounds, { padding: 45 });
+      console.log(bounds);
+      tempCity = city;
+      map.fitBounds(bounds, { padding: 45 }, { form: "fit" });
+      console.log("fit");
     });
   }
 
+  function moveHandler() {
+    //console.log("bounded");
+    checkSchools(tempCity);
+    //console.log("check");
+    cityName = tempCity;
+  }
+
   function move(city) {
+    if (city == cityName) {
+      return;
+    }
     setUrl(city);
+    console.log("move");
     $.ajax({
       url: curl,
       method: "GET",
-    }).then(function (response) {});
+    }).then(function (response) {
+      console.log(response);
+      long = response.features[0].center[0];
+      lat = response.features[0].center[1];
+      centMark.setLngLat(response.features[0].center);
+      map.setCenter(response.features[0].center, { form: "set", city: city });
+
+      //schoolFilter(city);
+      //console.log("moved");
+    });
   }
   init();
 
   $("#init").click(function () {
-    map.flyTo({ center: center, zoom: zoom });
+    map.flyTo({ center: center, zoom: zoom }, { form: "fly" });
   });
 
   $("#schools").click(function () {
