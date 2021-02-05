@@ -48,11 +48,10 @@
         <nav>
           <div class="nav-wrapper z-depth-0 searchBar">
             <form id="searchForm">
-              <div class="input-field">
-                <input id="search" type="search" required />
+              <div class="input-field" id="searchRef">
+                <input placeholder="City, State" id="search" type="search" required />
                 <label class="label-icon" for="search"
-                  ><i class="material-icons">search</i></label
-                >
+                  ><i class="material-icons" >search</i></label>
                 <i class="material-icons">close</i>
               </div>
             </form>
@@ -61,23 +60,18 @@
         <div class="divider"></div>
         <!-- Search criteria dropdown seletor -->
         <div class="input-field col s12 dropSearch">
-          <select>
-            <option value="" disabled selected>Search By City or Crime</option>
-            <option id="searchByCity" value="1">Search by City</option>
-            <option id="searchByCrime" value="2">Search by Crime</option>
-            <option id="searchBySchools" value="3">Search by Schools</option>
-          </select>
+
         </div>
 
-        <!-- Search Favorites -->
-        <ul class="collapsible">
+        <!-- Search Favorites
+        <ul class="dispSearchHistory">
           <li>
-            <div class="col s12 card-panel favorites">Favorites</div>
+            <div class="col s12 card-panel searchHistory">Search History</div>
           </li>
           <container id="favoritesDisp">
             <li>
               <div class="collapsible-header">
-                <i class="material-icons">favorite</i>Favorite 1
+                <i class="material-icons">favorite</i>Search History
               </div>
               <div class="collapsible-body">
                 <span>POPULATE DATA FOR THIS SEARCH</span>
@@ -92,25 +86,25 @@
               </div>
             </li>
           </container>
-        </ul>
+        </ul> -->
 
         <!-- Search History  -->
-        <div class="col s12 card-panel searchHistory">Search History</div>
-        <div class="divider"></div>
-        <div class="section">
-          <h6>Section 1</h6>
-          <p>Stuff</p>
-        </div>
-        <div class="divider"></div>
-        <div class="section">
-          <h6>Section 2</h6>
-          <p>Stuff</p>
-        </div>
-        <div class="divider"></div>
-        <div class="section">
-          <h6>Section 3</h6>
-          <p>Stuff</p>
-        </div>
+      <div class="col s12 card-panel searchHistory">Search History</div>
+          <div class="divider"></div>
+          <div class="section">
+            <h6>Section 1</h6>
+            <p>Stuff</p>
+          </div>
+          <div class="divider"></div>
+          <div class="section">
+            <h6>Section 2</h6>
+            <p>Stuff</p>
+          </div>
+          <div class="divider"></div>
+          <div class="section">
+            <h6>Section 3</h6>
+            <p>Stuff</p>
+          </div>
       </div>
 
       <!-- Row 1 Column 2 - Image, modal, search output -->
@@ -169,6 +163,7 @@
         </div>
       </div>
     </div>
+
   </body>
 
   <script type="text/javascript" src="js/materialize.js"></script>
