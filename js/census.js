@@ -1,4 +1,4 @@
-var Locationchange = function (userInput) {
+var Locationchange = function (place) {
   // $(document).ready(function () {
   //     $('.collapsible').collapsible();
   //     $('select').formSelect();
@@ -19,20 +19,28 @@ var Locationchange = function (userInput) {
     url: queryURL1,
     method: "GET",
   }).then(function (response) {
-    // console.log(response);
+    //console.log(response);
 
     var arrayplacecity = [];
     var arraymoney = [];
     for (let x = 1; x < response.length; x++) {
-      arrayplacecity.push(response[x][0]);
+      var word = response[x][0].split(",");
+      word[0] = word[0].split(" ");
+      word[1] = word[1].trim();
+      word[0].pop();
+      word[0] = word[0].join(" ");
+
+      word = word.join(" ");
+      arrayplacecity.push(word);
       arraymoney.push(response[x][1]);
     }
-    if (arrayplacecity.includes(userInput)) {
-      console.log(arraymoney[arrayplacecity.indexOf(userInput)]);
-      $("#city-name").text(userInput);
+    if (arrayplacecity.includes(place)) {
+      console.log(arraymoney[arrayplacecity.indexOf(place)]);
+
+      move(place);
+      $("#city-name").text(place);
       $("#income").text(
-        "Median Houshold Income: " +
-          arraymoney[arrayplacecity.indexOf(userInput)]
+        "Median Houshold Income: " + arraymoney[arrayplacecity.indexOf(place)]
       );
     }
   });
@@ -46,19 +54,28 @@ var Locationchange = function (userInput) {
     url: queryURL2,
     method: "GET",
   }).then(function (response2) {
-    // console.log(response2);
+    //console.log(response2);
 
     var arrayplacecity = [];
     var arraysmarts = [];
     for (let x = 1; x < response2.length; x++) {
-      arrayplacecity.push(response2[x][0]);
+      var word = response2[x][0].split(",");
+      word[0] = word[0].split(" ");
+      word[1] = word[1].trim();
+
+      word[0].pop();
+      word[0] = word[0].join(" ");
+
+      word = word.join(" ");
+      arrayplacecity.push(word);
+
       arraysmarts.push(response2[x][1]);
     }
-    if (arrayplacecity.includes(userInput)) {
-      console.log(arraysmarts[arrayplacecity.indexOf(userInput)]);
+    if (arrayplacecity.includes(place)) {
+      console.log(arraysmarts[arrayplacecity.indexOf(place)]);
       $("#smarts").text(
         "% of Individuals with Highschool Diploma or Higher: " +
-          arraysmarts[arrayplacecity.indexOf(userInput)]
+          arraysmarts[arrayplacecity.indexOf(place)]
       );
     }
   });
@@ -72,19 +89,26 @@ var Locationchange = function (userInput) {
     url: queryURL3,
     method: "GET",
   }).then(function (response3) {
-    // console.log(response3);
+    //console.log(response3);
 
     var arrayplacecity = [];
     var arrayage1 = [];
     for (let x = 1; x < response3.length; x++) {
-      arrayplacecity.push(response3[x][0]);
+      var word = response3[x][0].split(",");
+      word[0] = word[0].split(" ");
+      word[1] = word[1].trim();
+      word[0].pop();
+      word[0] = word[0].join(" ");
+
+      word = word.join(" ");
+      arrayplacecity.push(word);
       arrayage1.push(response3[x][1]);
     }
-    if (arrayplacecity.includes(userInput)) {
-      console.log(arrayage1[arrayplacecity.indexOf(userInput)]);
+    if (arrayplacecity.includes(place)) {
+      console.log(arrayage1[arrayplacecity.indexOf(place)]);
       $("#age1").text(
         "% of Individuals aged 25-34: " +
-          arrayage1[arrayplacecity.indexOf(userInput)]
+          arrayage1[arrayplacecity.indexOf(place)]
       );
     }
   });
@@ -103,14 +127,21 @@ var Locationchange = function (userInput) {
     var arrayplacecity = [];
     var arrayage2 = [];
     for (let x = 1; x < response4.length; x++) {
-      arrayplacecity.push(response4[x][0]);
+      var word = response4[x][0].split(",");
+      word[0] = word[0].split(" ");
+      word[1] = word[1].trim();
+      word[0].pop();
+      word[0] = word[0].join(" ");
+
+      word = word.join(" ");
+      arrayplacecity.push(word);
       arrayage2.push(response4[x][1]);
     }
-    if (arrayplacecity.includes(userInput)) {
-      console.log(arrayage2[arrayplacecity.indexOf(userInput)]);
+    if (arrayplacecity.includes(place)) {
+      console.log(arrayage2[arrayplacecity.indexOf(place)]);
       $("#age2").text(
         "% of Individuals aged 35-44: " +
-          arrayage2[arrayplacecity.indexOf(userInput)]
+          arrayage2[arrayplacecity.indexOf(place)]
       );
     }
   });
@@ -129,13 +160,20 @@ var Locationchange = function (userInput) {
     var arrayplacecity = [];
     var arraypop = [];
     for (let x = 1; x < response5.length; x++) {
-      arrayplacecity.push(response5[x][0]);
+      var word = response5[x][0].split(",");
+      word[0] = word[0].split(" ");
+      word[1] = word[1].trim();
+      word[0].pop();
+      word[0] = word[0].join(" ");
+
+      word = word.join(" ");
+      arrayplacecity.push(word);
       arraypop.push(response5[x][1]);
     }
-    if (arrayplacecity.includes(userInput)) {
-      console.log(arraypop[arrayplacecity.indexOf(userInput)]);
+    if (arrayplacecity.includes(place)) {
+      console.log(arraypop[arrayplacecity.indexOf(place)]);
       $("#pop").text(
-        "Total population: " + arraypop[arrayplacecity.indexOf(userInput)]
+        "Total population: " + arraypop[arrayplacecity.indexOf(place)]
       );
     }
   });
@@ -211,11 +249,26 @@ $("#searchForm").on("submit", function (event) {
   if (userInput == "") {
     return;
   }
-
+  $("#search").val("");
   passedsearch = $("<button>");
   passedsearch.addClass("section");
-  passedsearch.attr("location", userInput);
-  passedsearchtext = $("<h6>").text(userInput);
+  userInput = userInput.split(/,* /);
+  //console.log(userInput);
+  var place = "";
+  for (i = 0; i < userInput.length - 1; i++) {
+    place +=
+      " " +
+      userInput[i].substr(0, 1).toUpperCase() +
+      userInput[i].substr(1).toLowerCase();
+  }
+  place +=
+    " " +
+    userInput[userInput.length - 1].substr(0, 1).toUpperCase() +
+    userInput[userInput.length - 1].substr(1).toLowerCase();
+  place = place.trim();
+  //console.log(place);
+  passedsearch.attr("location", place);
+  passedsearchtext = $("<h6>").text(place);
   passedsearch.prepend(passedsearchtext);
   $("#input-searches").prepend(passedsearch);
   $(".section").on("click", function () {
