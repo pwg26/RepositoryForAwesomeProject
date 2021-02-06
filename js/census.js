@@ -15,13 +15,11 @@ var Locationchange = function (place) {
     "https://api.census.gov/data/2019/acs/acs5?get=NAME,B25119_001E&for=place:*&in=state:*&key=" +
     APIkey;
 
-  console.log(place);
-
   $.ajax({
     url: queryURL1,
     method: "GET",
   }).then(function (response) {
-    console.log(response);
+    //console.log(response);
 
     var arrayplacecity = [];
     var arraymoney = [];
@@ -40,8 +38,6 @@ var Locationchange = function (place) {
         ", " +
         word[word.length - 1].substr(0, 1).toUpperCase() +
         word[word.length - 1].substr(1).toLowerCase();
-
-      //console.log(resPlace);
 
       arrayplacecity.push(resPlace);
       arraymoney.push(response[x][1]);
@@ -66,7 +62,7 @@ var Locationchange = function (place) {
     url: queryURL2,
     method: "GET",
   }).then(function (response2) {
-    console.log(response2);
+    //console.log(response2);
 
     var arrayplacecity = [];
     var arraysmarts = [];
@@ -110,7 +106,7 @@ var Locationchange = function (place) {
     url: queryURL3,
     method: "GET",
   }).then(function (response3) {
-    console.log(response3);
+    //console.log(response3);
 
     var arrayplacecity = [];
     var arrayage1 = [];
@@ -153,7 +149,7 @@ var Locationchange = function (place) {
     url: queryURL4,
     method: "GET",
   }).then(function (response4) {
-    console.log(response4);
+    //console.log(response4);
 
     var arrayplacecity = [];
     var arrayage2 = [];
@@ -196,7 +192,7 @@ var Locationchange = function (place) {
     url: queryURL5,
     method: "GET",
   }).then(function (response5) {
-    console.log(response5);
+    //console.log(response5);
 
     var arrayplacecity = [];
     var arraypop = [];

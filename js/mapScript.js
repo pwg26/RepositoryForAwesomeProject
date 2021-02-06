@@ -69,20 +69,6 @@ $(window).on("load", function () {
       center = map.getCenter();
 
       schoolFilter();
-      //console.log("init");
-      map.on("click", function (e) {
-        // The event object (e) contains information like the
-        // coordinates of the point on the map that was clicked.
-        //console.log(e.lngLat); // has .lng and .lat properties
-        // $(".mapData > p").text(e.lngLat);
-        if (swap) {
-          move("New York, New York");
-          swap = !swap;
-        } else {
-          move("Chicago, Illinois");
-          swap = !swap;
-        }
-      });
 
       map.on("moveend", function (e) {
         //console.log("moved");
