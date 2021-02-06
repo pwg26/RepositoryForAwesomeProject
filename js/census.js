@@ -274,8 +274,8 @@ $("#searchForm").on("submit", function (event) {
   $(".section").on("click", function () {
     Locationchange($(this).attr("location"));
   });
-  localStorage.setItem(Object.entries(localStorage).length - 2, userInput);
-  Locationchange(userInput);
+  localStorage.setItem(Object.entries(localStorage).length - 2, place);
+  Locationchange(place);
 });
 
 // function that addes entries to local storage from user entry, populates the content with the new entry and adds event listener to run ajax call with that users entry
