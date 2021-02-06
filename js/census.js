@@ -15,6 +15,23 @@ var Locationchange = function (userInput) {
     "https://api.census.gov/data/2019/acs/acs5?get=NAME,B25119_001E&for=place:*&in=state:*&key=" +
     APIkey;
 
+  userInput = userInput.split(" ");
+  var place = "";
+  for (i = 0; i < userInput.length - 1; i++) {
+    if (i != userInput.length - 2) {
+      place +=
+        " " +
+        userInput[i].substr(0, 1).toUpperCase() +
+        userInput[i].substr(1).toLowerCase();
+    }
+  }
+  place +=
+    ", " +
+    userInput[userInput.length - 1].substr(0, 1).toUpperCase() +
+    userInput[userInput.length - 1].substr(1).toLowerCase();
+
+  console.log(place);
+
   $.ajax({
     url: queryURL1,
     method: "GET",
@@ -24,18 +41,33 @@ var Locationchange = function (userInput) {
     var arrayplacecity = [];
     var arraymoney = [];
     for (let x = 1; x < response.length; x++) {
-      arrayplacecity.push(response[x][0]);
+      var resPlace = "";
+      var word = response[x][0].split(" ");
+      for (i = 0; i < word.length - 1; i++) {
+        if (i != word.length - 2) {
+          resPlace +=
+            " " +
+            word[i].substr(0, 1).toUpperCase() +
+            word[i].substr(1).toLowerCase();
+        }
+      }
+      resPlace +=
+        ", " +
+        word[word.length - 1].substr(0, 1).toUpperCase() +
+        word[word.length - 1].substr(1).toLowerCase();
+
+      //console.log(resPlace);
+
+      arrayplacecity.push(resPlace);
       arraymoney.push(response[x][1]);
     }
-    if (arrayplacecity.includes(userInput)) {
-      console.log(arraymoney[arrayplacecity.indexOf(userInput)]);
-      var city = userInput.split(" ");
-      city = city[0] + ", " + city[2];
-      move(city);
-      $("#city-name").text(city);
+    if (arrayplacecity.includes(place)) {
+      console.log(arraymoney[arrayplacecity.indexOf(place)]);
+
+      move(place);
+      $("#city-name").text(place);
       $("#income").text(
-        "Median Houshold Income: " +
-          arraymoney[arrayplacecity.indexOf(userInput)]
+        "Median Houshold Income: " + arraymoney[arrayplacecity.indexOf(place)]
       );
     }
   });
@@ -54,14 +86,32 @@ var Locationchange = function (userInput) {
     var arrayplacecity = [];
     var arraysmarts = [];
     for (let x = 1; x < response2.length; x++) {
-      arrayplacecity.push(response2[x][0]);
+      var resPlace = "";
+      var word = response2[x][0].split(" ");
+      for (i = 0; i < word.length - 1; i++) {
+        if (i != word.length - 2) {
+          resPlace +=
+            " " +
+            word[i].substr(0, 1).toUpperCase() +
+            word[i].substr(1).toLowerCase();
+        }
+      }
+      resPlace +=
+        ", " +
+        word[word.length - 1].substr(0, 1).toUpperCase() +
+        word[word.length - 1].substr(1).toLowerCase();
+
+      //console.log(resPlace);
+
+      arrayplacecity.push(resPlace);
+
       arraysmarts.push(response2[x][1]);
     }
-    if (arrayplacecity.includes(userInput)) {
-      console.log(arraysmarts[arrayplacecity.indexOf(userInput)]);
+    if (arrayplacecity.includes(place)) {
+      console.log(arraysmarts[arrayplacecity.indexOf(place)]);
       $("#smarts").text(
         "% of Individuals with Highschool Diploma or Higher: " +
-          arraysmarts[arrayplacecity.indexOf(userInput)]
+          arraysmarts[arrayplacecity.indexOf(place)]
       );
     }
   });
@@ -80,14 +130,31 @@ var Locationchange = function (userInput) {
     var arrayplacecity = [];
     var arrayage1 = [];
     for (let x = 1; x < response3.length; x++) {
-      arrayplacecity.push(response3[x][0]);
+      var resPlace = "";
+      var word = response3[x][0].split(" ");
+      for (i = 0; i < word.length - 1; i++) {
+        if (i != word.length - 2) {
+          resPlace +=
+            " " +
+            word[i].substr(0, 1).toUpperCase() +
+            word[i].substr(1).toLowerCase();
+        }
+      }
+      resPlace +=
+        ", " +
+        word[word.length - 1].substr(0, 1).toUpperCase() +
+        word[word.length - 1].substr(1).toLowerCase();
+
+      //console.log(resPlace);
+
+      arrayplacecity.push(resPlace);
       arrayage1.push(response3[x][1]);
     }
-    if (arrayplacecity.includes(userInput)) {
-      console.log(arrayage1[arrayplacecity.indexOf(userInput)]);
+    if (arrayplacecity.includes(place)) {
+      console.log(arrayage1[arrayplacecity.indexOf(place)]);
       $("#age1").text(
         "% of Individuals aged 25-34: " +
-          arrayage1[arrayplacecity.indexOf(userInput)]
+          arrayage1[arrayplacecity.indexOf(place)]
       );
     }
   });
@@ -106,14 +173,31 @@ var Locationchange = function (userInput) {
     var arrayplacecity = [];
     var arrayage2 = [];
     for (let x = 1; x < response4.length; x++) {
-      arrayplacecity.push(response4[x][0]);
+      var resPlace = "";
+      var word = response4[x][0].split(" ");
+      for (i = 0; i < word.length - 1; i++) {
+        if (i != word.length - 2) {
+          resPlace +=
+            " " +
+            word[i].substr(0, 1).toUpperCase() +
+            word[i].substr(1).toLowerCase();
+        }
+      }
+      resPlace +=
+        ", " +
+        word[word.length - 1].substr(0, 1).toUpperCase() +
+        word[word.length - 1].substr(1).toLowerCase();
+
+      //console.log(resPlace);
+
+      arrayplacecity.push(resPlace);
       arrayage2.push(response4[x][1]);
     }
-    if (arrayplacecity.includes(userInput)) {
-      console.log(arrayage2[arrayplacecity.indexOf(userInput)]);
+    if (arrayplacecity.includes(place)) {
+      console.log(arrayage2[arrayplacecity.indexOf(place)]);
       $("#age2").text(
         "% of Individuals aged 35-44: " +
-          arrayage2[arrayplacecity.indexOf(userInput)]
+          arrayage2[arrayplacecity.indexOf(place)]
       );
     }
   });
@@ -132,13 +216,30 @@ var Locationchange = function (userInput) {
     var arrayplacecity = [];
     var arraypop = [];
     for (let x = 1; x < response5.length; x++) {
-      arrayplacecity.push(response5[x][0]);
+      var resPlace = "";
+      var word = response5[x][0].split(" ");
+      for (i = 0; i < word.length - 1; i++) {
+        if (i != word.length - 2) {
+          resPlace +=
+            " " +
+            word[i].substr(0, 1).toUpperCase() +
+            word[i].substr(1).toLowerCase();
+        }
+      }
+      resPlace +=
+        ", " +
+        word[word.length - 1].substr(0, 1).toUpperCase() +
+        word[word.length - 1].substr(1).toLowerCase();
+
+      //console.log(resPlace);
+
+      arrayplacecity.push(resPlace);
       arraypop.push(response5[x][1]);
     }
-    if (arrayplacecity.includes(userInput)) {
-      console.log(arraypop[arrayplacecity.indexOf(userInput)]);
+    if (arrayplacecity.includes(place)) {
+      console.log(arraypop[arrayplacecity.indexOf(place)]);
       $("#pop").text(
-        "Total population: " + arraypop[arrayplacecity.indexOf(userInput)]
+        "Total population: " + arraypop[arrayplacecity.indexOf(place)]
       );
     }
   });
