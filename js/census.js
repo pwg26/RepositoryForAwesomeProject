@@ -1,4 +1,4 @@
-var Locationchange = function (userInput) {
+var Locationchange = function (place) {
   // $(document).ready(function () {
   //     $('.collapsible').collapsible();
   //     $('select').formSelect();
@@ -14,21 +14,6 @@ var Locationchange = function (userInput) {
   var queryURL1 =
     "https://api.census.gov/data/2019/acs/acs5?get=NAME,B25119_001E&for=place:*&in=state:*&key=" +
     APIkey;
-
-  userInput = userInput.split(" ");
-  var place = "";
-  for (i = 0; i < userInput.length - 1; i++) {
-    if (i != userInput.length - 2) {
-      place +=
-        " " +
-        userInput[i].substr(0, 1).toUpperCase() +
-        userInput[i].substr(1).toLowerCase();
-    }
-  }
-  place +=
-    ", " +
-    userInput[userInput.length - 1].substr(0, 1).toUpperCase() +
-    userInput[userInput.length - 1].substr(1).toLowerCase();
 
   console.log(place);
 
@@ -259,16 +244,37 @@ $("#searchForm").on("submit", function (event) {
     return;
   }
   passedsearch = $("<button>");
-  passedsearch.addClass("passed");
-  passedsearch.text(userInput);
-  passedsearch.attr("location", userInput);
-  $("#prepend").prepend(passedsearch);
-  $(".passed").on("click", function () {
+  passedsearch.addClass("section");
+  userInput = userInput.split(" ");
+  var place = "";
+  for (i = 0; i < userInput.length - 1; i++) {
+    if (i != userInput.length - 2) {
+      place +=
+        " " +
+        userInput[i].substr(0, 1).toUpperCase() +
+        userInput[i].substr(1).toLowerCase();
+    }
+  }
+  place +=
+    ", " +
+    userInput[userInput.length - 1].substr(0, 1).toUpperCase() +
+    userInput[userInput.length - 1].substr(1).toLowerCase();
+  passedsearch.attr("location", place);
+  passedsearchtext = $("<h6>").text(place);
+  passedsearch.prepend(passedsearchtext);
+  $("#input-searches").prepend(passedsearch);
+  $(".section").on("click", function () {
     Locationchange($(this).attr("location"));
   });
-  localStorage.setItem(Object.entries(localStorage).length + 1, userInput);
 
-  Locationchange(userInput);
+  // passedsearch.text(userInput);
+  // ;
+  // $("#prepend").prepend(passedsearch);
+  // $(".passed").on("click", function () {
+  //   Locationchange($(this).attr("location"));
+  // });
+  // localStorage.setItem(Object.entries(localStorage).length + 1, userInput);
+  Locationchange(place);
 });
 
 // function that addes entries to local storage from user entry, populates the content with the new entry and adds event listener to run ajax call with that users entry
