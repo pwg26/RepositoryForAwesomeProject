@@ -40,7 +40,8 @@ var Locationchange = function (place) {
       move(place);
       $("#city-name").text(place);
       $("#income").text(
-        "Median Houshold Income: " + arraymoney[arrayplacecity.indexOf(place)]
+
+        "Median Household Income: " + arraymoney[arrayplacecity.indexOf(place)]
       );
     }
   });
@@ -249,7 +250,15 @@ $("#searchForm").on("submit", function (event) {
   if (userInput == "") {
     return;
   }
+  
+  
+  divAdd = $("<div>");
+  divAdd.addClass("divider");
+  divAdd.addClass("section")
+  divAdd.addClass("historyDivs")
   $("#search").val("");
+
+main
   passedsearch = $("<button>");
   passedsearch.addClass("section");
   userInput = userInput.split(/,* /);
@@ -271,7 +280,10 @@ $("#searchForm").on("submit", function (event) {
   passedsearchtext = $("<h6>").text(place);
   passedsearch.prepend(passedsearchtext);
   $("#input-searches").prepend(passedsearch);
+  $("#input-searches").prepend(divAdd);
   $(".section").on("click", function () {
+
+    this.style.background = white;
     Locationchange($(this).attr("location"));
   });
   localStorage.setItem(Object.entries(localStorage).length - 2, place);
