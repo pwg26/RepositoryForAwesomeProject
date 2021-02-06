@@ -155,14 +155,22 @@ $("#searchForm").on("submit", function (event) {
     return;
   }
   passedsearch = $("<button>");
-  passedsearch.addClass("passed");
-  passedsearch.text(userInput);
+  passedsearch.addClass("section");
   passedsearch.attr("location", userInput);
-  $("#prepend").prepend(passedsearch);
-  $(".passed").on("click", function () {
+  passedsearchtext = $("<h6>").text(userInput);
+  passedsearch.prepend(passedsearchtext);
+  $("#input-searches").prepend(passedsearch);
+  $(".section").on("click", function () {
     Locationchange($(this).attr("location"));
   });
-  localStorage.setItem(Object.entries(localStorage).length + 1, userInput);
+
+  // passedsearch.text(userInput);
+  // ;
+  // $("#prepend").prepend(passedsearch);
+  // $(".passed").on("click", function () {
+  //   Locationchange($(this).attr("location"));
+  // });
+  // localStorage.setItem(Object.entries(localStorage).length + 1, userInput);
   Locationchange(userInput);
 });
 
