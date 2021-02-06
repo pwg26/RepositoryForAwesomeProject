@@ -19,7 +19,7 @@ var Locationchange = function (userInput) {
     url: queryURL1,
     method: "GET",
   }).then(function (response) {
-    console.log(response);
+    // console.log(response);
 
     var arrayplacecity = [];
     var arraymoney = [];
@@ -46,7 +46,7 @@ var Locationchange = function (userInput) {
     url: queryURL2,
     method: "GET",
   }).then(function (response2) {
-    console.log(response2);
+    // console.log(response2);
 
     var arrayplacecity = [];
     var arraysmarts = [];
@@ -72,7 +72,7 @@ var Locationchange = function (userInput) {
     url: queryURL3,
     method: "GET",
   }).then(function (response3) {
-    console.log(response3);
+    // console.log(response3);
 
     var arrayplacecity = [];
     var arrayage1 = [];
@@ -98,7 +98,7 @@ var Locationchange = function (userInput) {
     url: queryURL4,
     method: "GET",
   }).then(function (response4) {
-    console.log(response4);
+    // console.log(response4);
 
     var arrayplacecity = [];
     var arrayage2 = [];
@@ -124,7 +124,7 @@ var Locationchange = function (userInput) {
     url: queryURL5,
     method: "GET",
   }).then(function (response5) {
-    console.log(response5);
+    // console.log(response5);
 
     var arrayplacecity = [];
     var arraypop = [];
@@ -140,12 +140,69 @@ var Locationchange = function (userInput) {
     }
   });
 
-  // realator API-*****************
+  // Realator API for auto correct to extract lat and long
+  //   const settings = {
+  //     async: true,
+  //     crossDomain: true,
+  //     url:
+  //       "https://realtor.p.rapidapi.com/locations/auto-complete?input=" +
+  //       userInput,
+  //     method: "GET",
+  //     headers: {
+  //       "x-rapidapi-key": "df5268e97cmshe48e4c9ee315bddp136d9djsnbfac66c2f049",
+  //       "x-rapidapi-host": "realtor.p.rapidapi.com",
+  //     },
+  //   };
 
-  // var = score
+  //   $.ajax(settings).done(function (response6) {
+  //     console.log(response6);
 
-  // if ()
+  // // api for average price of last 200 sold homes
+
+  // var unirest = require("unirest");
+
+  // var req = unirest("GET", "https://realtor.p.rapidapi.com/properties/v2/list-sold");
+
+  // req.query({
+  // 	"city": "New York City",
+  // 	"offset": "0",
+  // 	"state_code": "NY",
+  // 	"limit": "200",
+  // 	"prop_type": "single_family",
+  // 	"sort": "sold_date"
+  // });
+
+  // req.headers({
+  // 	"x-rapidapi-key": "df5268e97cmshe48e4c9ee315bddp136d9djsnbfac66c2f049",
+  // 	"x-rapidapi-host": "realtor.p.rapidapi.com",
+  // 	"useQueryString": true
+  // });
+
+  // req.end(function (res) {
+  // 	if (res.error) throw new Error(res.error);
+
+  // 	console.log(res.body);
+  // });
+
+  // }
+
+  // }
 };
+
+if (Object.entries(localStorage).length > 3) {
+  for (x = 0; x < Object.entries(localStorage).length - 2; x++) {
+    passedsearch = $("<button>");
+    passedsearch.addClass("section");
+    passedsearch.attr("id", [x] + "memory");
+    passedsearch.attr("location", localStorage.getItem([x]));
+    passedsearchtext = $("<h6>").text(localStorage.getItem([x]));
+    passedsearch.prepend(passedsearchtext);
+    $("#input-searches").prepend(passedsearch);
+    $(".section").on("click", function () {
+      Locationchange($(this).attr("location"));
+    });
+  }
+}
 
 // fucntion for user input
 $("#searchForm").on("submit", function (event) {
@@ -154,6 +211,7 @@ $("#searchForm").on("submit", function (event) {
   if (userInput == "") {
     return;
   }
+
   passedsearch = $("<button>");
   passedsearch.addClass("section");
   passedsearch.attr("location", userInput);
@@ -163,14 +221,7 @@ $("#searchForm").on("submit", function (event) {
   $(".section").on("click", function () {
     Locationchange($(this).attr("location"));
   });
-
-  // passedsearch.text(userInput);
-  // ;
-  // $("#prepend").prepend(passedsearch);
-  // $(".passed").on("click", function () {
-  //   Locationchange($(this).attr("location"));
-  // });
-  // localStorage.setItem(Object.entries(localStorage).length + 1, userInput);
+  localStorage.setItem(Object.entries(localStorage).length - 2, userInput);
   Locationchange(userInput);
 });
 
@@ -192,7 +243,6 @@ $("#searchForm").on("submit", function (event) {
 //   $(".prev-search").on("click", function () {
 //     Locationchange($(this).attr("location"));
 //   });
-//   localStorage.setItem(Object.entries(localStorage).length + 1, userInput);
 
 //   Locationchange(userInput);
 // });
