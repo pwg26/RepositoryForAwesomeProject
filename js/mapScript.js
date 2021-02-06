@@ -34,7 +34,6 @@ $(window).on("load", function () {
   var schoolLoc;
   var centMark;
   var tempCity;
-  var swap = true;
 
   function setUrl(city) {
     curl =
@@ -78,7 +77,7 @@ $(window).on("load", function () {
         //console.log(e);
         zoom = map.getZoom();
         center = map.getCenter();
-        $(".mapData > p").text("(" + long + ", " + lat + ")");
+
         if (e.form == "fit") {
           moveHandler();
         } else if (e.form == "set") {
@@ -166,10 +165,12 @@ $(window).on("load", function () {
       method: "GET",
     }).then(function (response) {
       var bounds = [lat, lat, long, long];
-
+      $(".mapData").empty();
       response.features.forEach(function (school) {
-        console.log(school.place_name);
+        //console.log(school.place_name);
         schoolLoc.push(school.center);
+
+        $(".mapData").append($("<p>").text(school.place_name));
 
         if (school.center[1] > bounds[3]) {
           bounds[3] = school.center[1];
@@ -202,7 +203,7 @@ $(window).on("load", function () {
     if (city == cityName && center.distanceTo(map.getCenter()) == 0) {
       return;
     }
-    console.log(city);
+    //console.log(city);
     setUrl(city);
     $.ajax({
       url: curl,

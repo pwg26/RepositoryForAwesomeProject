@@ -62,6 +62,7 @@ var Locationchange = function (place) {
       var word = response2[x][0].split(",");
       word[0] = word[0].split(" ");
       word[1] = word[1].trim();
+
       word[0].pop();
       word[0] = word[0].join(" ");
 
@@ -191,6 +192,7 @@ $("#searchForm").on("submit", function (event) {
   if (userInput == "") {
     return;
   }
+  $("#search").val("");
   passedsearch = $("<button>");
   passedsearch.addClass("section");
   userInput = userInput.split(/,* /);
