@@ -31,7 +31,7 @@ var Locationchange = function (userInput) {
       console.log(arraymoney[arrayplacecity.indexOf(userInput)]);
       $("#city-name").text(userInput);
       $("#income").text(
-        "Median Houshold Income: " +
+        "Median Household Income: " +
           arraymoney[arrayplacecity.indexOf(userInput)]
       );
     }
@@ -154,13 +154,25 @@ $("#searchForm").on("submit", function (event) {
   if (userInput == "") {
     return;
   }
+
+  
+  divAdd = $("<div>");
+  divAdd.addClass("divider");
+  divAdd.addClass("section")
+  divAdd.addClass("historyDivs")
+
+
+
   passedsearch = $("<button>");
   passedsearch.addClass("section");
   passedsearch.attr("location", userInput);
   passedsearchtext = $("<h6>").text(userInput);
   passedsearch.prepend(passedsearchtext);
   $("#input-searches").prepend(passedsearch);
+  $("#input-searches").prepend(divAdd);
   $(".section").on("click", function () {
+
+    this.style.background = white;
     Locationchange($(this).attr("location"));
   });
 

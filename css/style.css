@@ -46,3 +46,48 @@ span {
 #searchRef {
   color: black !important;
 }
+/* 
+button { */
+/* display: inline-block;
+  padding: 1px;
+  border-radius: 2em;
+  box-sizing: border-box;
+  text-decoration: black;
+  color: black;
+  background-color: #fff9c4;
+  text-align: center;
+  transition: all 0.2s;
+  padding: 3px; */
+
+button {
+  display: inline-block;
+  padding: 2px;
+  border: 0.2em solid #000000;
+  margin: 0.1em 0.3em 0;
+  border-radius: 5px;
+  box-sizing: border-box;
+  font-weight: 300;
+  color: black;
+  background-color: #fff9c4;
+  text-align: center;
+  transition: all 0.2s;
+}
+
+button.focus {
+  background-color: white;
+}
+
+.divider {
+  background-color: white;
+
+  height: 75%;
+  width: 50%;
+}
+
+.section.click {
+  background-color: white;
+}
+
+/* button.hover {
+  background-color: white;
+} */
