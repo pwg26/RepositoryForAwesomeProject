@@ -229,12 +229,17 @@ var Locationchange = function (place) {
 
 if (Object.entries(localStorage).length > 3) {
   for (x = 0; x < Object.entries(localStorage).length - 2; x++) {
+    divAdd = $("<div>");
+    divAdd.addClass("divider");
+    divAdd.addClass("section");
+    divAdd.addClass("historyDivs");
     passedsearch = $("<button>");
     passedsearch.addClass("section");
     passedsearch.attr("id", [x] + "memory");
     passedsearch.attr("location", localStorage.getItem([x]));
     passedsearchtext = $("<h6>").text(localStorage.getItem([x]));
     passedsearch.prepend(passedsearchtext);
+    $("#input-searches").prepend(divAdd);
     $("#input-searches").prepend(passedsearch);
     $(".section").on("click", function () {
       Locationchange($(this).attr("location"));
@@ -279,7 +284,6 @@ $("#searchForm").on("submit", function (event) {
   $("#input-searches").prepend(passedsearch);
   $("#input-searches").prepend(divAdd);
   $(".section").on("click", function () {
-    this.style.background = white;
     Locationchange($(this).attr("location"));
   });
   localStorage.setItem(Object.entries(localStorage).length - 2, place);
