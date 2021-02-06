@@ -1,4 +1,21 @@
 var move;
+
+// const settings = {
+//   async: true,
+//   crossDomain: true,
+//   url:
+//     "https://realtor.p.rapidapi.com/schools/list-nearby?lon=-117.937021&lat=35.129431",
+//   method: "GET",
+//   headers: {
+//     "x-rapidapi-key": "8d03ef92f1msh064a347ce15d2d7p1ef19bjsn16f97626d9b7",
+//     "x-rapidapi-host": "realtor.p.rapidapi.com",
+//   },
+// };
+
+// $.ajax(settings).done(function (response) {
+//   console.log(response);
+// });
+
 $(window).on("load", function () {
   var cityName = "Denver, Colorado";
   var apiKey =

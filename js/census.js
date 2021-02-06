@@ -166,6 +166,7 @@ $("#searchForm").on("submit", function (event) {
     Locationchange($(this).attr("location"));
   });
   localStorage.setItem(Object.entries(localStorage).length + 1, userInput);
+
   Locationchange(userInput);
 });
 
