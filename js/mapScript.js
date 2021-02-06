@@ -17,7 +17,7 @@ var move;
 // });
 
 $(window).on("load", function () {
-  var cityName = "Denver, Colorado";
+  var cityName = "Denver Colorado";
   var apiKey =
     "pk.eyJ1IjoiY3pvZWxsZXIiLCJhIjoiY2trb2N0cmRxMDk5eDJ2cGNtNWJtNW43NyJ9.h0-nqul__11A8sAYcrsCGg";
   var curl =
@@ -199,7 +199,7 @@ $(window).on("load", function () {
   }
 
   move = function (city) {
-    if (city == cityName) {
+    if (city == cityName && center.distanceTo(map.getCenter()) == 0) {
       return;
     }
     console.log(city);

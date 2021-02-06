@@ -24,22 +24,14 @@ var Locationchange = function (place) {
     var arrayplacecity = [];
     var arraymoney = [];
     for (let x = 1; x < response.length; x++) {
-      var resPlace = "";
-      var word = response[x][0].split(" ");
-      for (i = 0; i < word.length - 1; i++) {
-        if (i != word.length - 2) {
-          resPlace +=
-            " " +
-            word[i].substr(0, 1).toUpperCase() +
-            word[i].substr(1).toLowerCase();
-        }
-      }
-      resPlace +=
-        ", " +
-        word[word.length - 1].substr(0, 1).toUpperCase() +
-        word[word.length - 1].substr(1).toLowerCase();
+      var word = response[x][0].split(",");
+      word[0] = word[0].split(" ");
+      word[1] = word[1].trim();
+      word[0].pop();
+      word[0] = word[0].join(" ");
 
-      arrayplacecity.push(resPlace);
+      word = word.join(" ");
+      arrayplacecity.push(word);
       arraymoney.push(response[x][1]);
     }
     if (arrayplacecity.includes(place)) {
@@ -67,24 +59,14 @@ var Locationchange = function (place) {
     var arrayplacecity = [];
     var arraysmarts = [];
     for (let x = 1; x < response2.length; x++) {
-      var resPlace = "";
-      var word = response2[x][0].split(" ");
-      for (i = 0; i < word.length - 1; i++) {
-        if (i != word.length - 2) {
-          resPlace +=
-            " " +
-            word[i].substr(0, 1).toUpperCase() +
-            word[i].substr(1).toLowerCase();
-        }
-      }
-      resPlace +=
-        ", " +
-        word[word.length - 1].substr(0, 1).toUpperCase() +
-        word[word.length - 1].substr(1).toLowerCase();
+      var word = response2[x][0].split(",");
+      word[0] = word[0].split(" ");
+      word[1] = word[1].trim();
+      word[0].pop();
+      word[0] = word[0].join(" ");
 
-      //console.log(resPlace);
-
-      arrayplacecity.push(resPlace);
+      word = word.join(" ");
+      arrayplacecity.push(word);
 
       arraysmarts.push(response2[x][1]);
     }
@@ -111,24 +93,14 @@ var Locationchange = function (place) {
     var arrayplacecity = [];
     var arrayage1 = [];
     for (let x = 1; x < response3.length; x++) {
-      var resPlace = "";
-      var word = response3[x][0].split(" ");
-      for (i = 0; i < word.length - 1; i++) {
-        if (i != word.length - 2) {
-          resPlace +=
-            " " +
-            word[i].substr(0, 1).toUpperCase() +
-            word[i].substr(1).toLowerCase();
-        }
-      }
-      resPlace +=
-        ", " +
-        word[word.length - 1].substr(0, 1).toUpperCase() +
-        word[word.length - 1].substr(1).toLowerCase();
+      var word = response3[x][0].split(",");
+      word[0] = word[0].split(" ");
+      word[1] = word[1].trim();
+      word[0].pop();
+      word[0] = word[0].join(" ");
 
-      //console.log(resPlace);
-
-      arrayplacecity.push(resPlace);
+      word = word.join(" ");
+      arrayplacecity.push(word);
       arrayage1.push(response3[x][1]);
     }
     if (arrayplacecity.includes(place)) {
@@ -154,24 +126,14 @@ var Locationchange = function (place) {
     var arrayplacecity = [];
     var arrayage2 = [];
     for (let x = 1; x < response4.length; x++) {
-      var resPlace = "";
-      var word = response4[x][0].split(" ");
-      for (i = 0; i < word.length - 1; i++) {
-        if (i != word.length - 2) {
-          resPlace +=
-            " " +
-            word[i].substr(0, 1).toUpperCase() +
-            word[i].substr(1).toLowerCase();
-        }
-      }
-      resPlace +=
-        ", " +
-        word[word.length - 1].substr(0, 1).toUpperCase() +
-        word[word.length - 1].substr(1).toLowerCase();
+      var word = response4[x][0].split(",");
+      word[0] = word[0].split(" ");
+      word[1] = word[1].trim();
+      word[0].pop();
+      word[0] = word[0].join(" ");
 
-      //console.log(resPlace);
-
-      arrayplacecity.push(resPlace);
+      word = word.join(" ");
+      arrayplacecity.push(word);
       arrayage2.push(response4[x][1]);
     }
     if (arrayplacecity.includes(place)) {
@@ -197,24 +159,14 @@ var Locationchange = function (place) {
     var arrayplacecity = [];
     var arraypop = [];
     for (let x = 1; x < response5.length; x++) {
-      var resPlace = "";
-      var word = response5[x][0].split(" ");
-      for (i = 0; i < word.length - 1; i++) {
-        if (i != word.length - 2) {
-          resPlace +=
-            " " +
-            word[i].substr(0, 1).toUpperCase() +
-            word[i].substr(1).toLowerCase();
-        }
-      }
-      resPlace +=
-        ", " +
-        word[word.length - 1].substr(0, 1).toUpperCase() +
-        word[word.length - 1].substr(1).toLowerCase();
+      var word = response5[x][0].split(",");
+      word[0] = word[0].split(" ");
+      word[1] = word[1].trim();
+      word[0].pop();
+      word[0] = word[0].join(" ");
 
-      //console.log(resPlace);
-
-      arrayplacecity.push(resPlace);
+      word = word.join(" ");
+      arrayplacecity.push(word);
       arraypop.push(response5[x][1]);
     }
     if (arrayplacecity.includes(place)) {
@@ -241,20 +193,21 @@ $("#searchForm").on("submit", function (event) {
   }
   passedsearch = $("<button>");
   passedsearch.addClass("section");
-  userInput = userInput.split(" ");
+  userInput = userInput.split(/,* /);
+  //console.log(userInput);
   var place = "";
   for (i = 0; i < userInput.length - 1; i++) {
-    if (i != userInput.length - 2) {
-      place +=
-        " " +
-        userInput[i].substr(0, 1).toUpperCase() +
-        userInput[i].substr(1).toLowerCase();
-    }
+    place +=
+      " " +
+      userInput[i].substr(0, 1).toUpperCase() +
+      userInput[i].substr(1).toLowerCase();
   }
   place +=
-    ", " +
+    " " +
     userInput[userInput.length - 1].substr(0, 1).toUpperCase() +
     userInput[userInput.length - 1].substr(1).toLowerCase();
+  place = place.trim();
+  //console.log(place);
   passedsearch.attr("location", place);
   passedsearchtext = $("<h6>").text(place);
   passedsearch.prepend(passedsearchtext);
