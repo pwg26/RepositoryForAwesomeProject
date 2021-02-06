@@ -40,7 +40,6 @@ var Locationchange = function (place) {
       move(place);
       $("#city-name").text(place);
       $("#income").text(
-
         "Median Household Income: " + arraymoney[arrayplacecity.indexOf(place)]
       );
     }
@@ -250,15 +249,13 @@ $("#searchForm").on("submit", function (event) {
   if (userInput == "") {
     return;
   }
-  
-  
+
   divAdd = $("<div>");
   divAdd.addClass("divider");
-  divAdd.addClass("section")
-  divAdd.addClass("historyDivs")
+  divAdd.addClass("section");
+  divAdd.addClass("historyDivs");
   $("#search").val("");
 
-main
   passedsearch = $("<button>");
   passedsearch.addClass("section");
   userInput = userInput.split(/,* /);
@@ -282,7 +279,6 @@ main
   $("#input-searches").prepend(passedsearch);
   $("#input-searches").prepend(divAdd);
   $(".section").on("click", function () {
-
     this.style.background = white;
     Locationchange($(this).attr("location"));
   });
