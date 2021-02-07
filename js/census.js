@@ -1,10 +1,13 @@
+// let searchHistory = getSearchHistory();
+
+// addItemSearchHistory("Denver, Co");
+
 var Locationchange = function (place) {
   // $(document).ready(function () {
   //     $('.collapsible').collapsible();
   //     $('select').formSelect();
   //     $('.modal').modal();
   // });
-
   //   "https://api.census.gov/data/2019/acs/acs5?get=NAME,B25119_001E&for=place:*&key="
 
   //api.census.gov/data/2019/acs/acs5?get=NAME,B01001_001E&for=county:*
@@ -179,52 +182,7 @@ var Locationchange = function (place) {
   });
 
   // Realator API for auto correct to extract lat and long
-  //   const settings = {
-  //     async: true,
-  //     crossDomain: true,
-  //     url:
-  //       "https://realtor.p.rapidapi.com/locations/auto-complete?input=" +
-  //       userInput,
-  //     method: "GET",
-  //     headers: {
-  //       "x-rapidapi-key": "df5268e97cmshe48e4c9ee315bddp136d9djsnbfac66c2f049",
-  //       "x-rapidapi-host": "realtor.p.rapidapi.com",
-  //     },
-  //   };
-
-  //   $.ajax(settings).done(function (response6) {
-  //     console.log(response6);
-
-  // // api for average price of last 200 sold homes
-
-  // var unirest = require("unirest");
-
-  // var req = unirest("GET", "https://realtor.p.rapidapi.com/properties/v2/list-sold");
-
-  // req.query({
-  // 	"city": "New York City",
-  // 	"offset": "0",
-  // 	"state_code": "NY",
-  // 	"limit": "200",
-  // 	"prop_type": "single_family",
-  // 	"sort": "sold_date"
-  // });
-
-  // req.headers({
-  // 	"x-rapidapi-key": "df5268e97cmshe48e4c9ee315bddp136d9djsnbfac66c2f049",
-  // 	"x-rapidapi-host": "realtor.p.rapidapi.com",
-  // 	"useQueryString": true
-  // });
-
-  // req.end(function (res) {
-  // 	if (res.error) throw new Error(res.error);
-
-  // 	console.log(res.body);
-  // });
-
-  // }
-
-  // }
+  getAutoComplete(place);
 };
 
 if (Object.entries(localStorage).length > 3) {
@@ -254,6 +212,8 @@ $("#searchForm").on("submit", function (event) {
   if (userInput == "") {
     return;
   }
+
+  getAutoComplete(userInput);
 
   divAdd = $("<div>");
   divAdd.addClass("divider");
@@ -352,3 +312,72 @@ $("#searchForm").on("submit", function (event) {
 
 //   Locationchange(userInput);
 // });
+
+// function getSearchHistory() {
+//   return JSON.parse(localStorage.getItem("searchHistory")) || [];
+// }
+
+// function addItemSearchHistory(item) {
+//   searchHistory = searchHistory.filter(function (city) {
+//     return city !== item;
+//   });
+
+//   searchHistory.unshift(item);
+//   localStorage.setItem("searchHistory", JSON.stringify(searchHistory));
+// }
+
+// New York City => New%20York%20City
+function getAutoComplete(city) {
+  const settings = {
+    async: true,
+    crossDomain: true,
+    url:
+      "https://realtor.p.rapidapi.com/locations/auto-complete?input=" +
+      city.split(" ").join("%20"),
+    method: "GET",
+    headers: {
+      "x-rapidapi-key": "df5268e97cmshe48e4c9ee315bddp136d9djsnbfac66c2f049",
+      "x-rapidapi-host": "realtor.p.rapidapi.com",
+    },
+  };
+
+  $.ajax(settings).done(function (response) {
+    const city = response.autocomplete[0];
+    const obj = {
+      city: city.city,
+      state_code: city.state_code,
+    };
+    // addItemSearchHistory(obj);
+    getPropertyValues(obj);
+  });
+}
+
+function getPropertyValues(cityObj) {
+  const settings = {
+    async: true,
+    crossDomain: true,
+    url:
+      "https://realtor.p.rapidapi.com/properties/list-for-sale?state_code=" +
+      cityObj.state_code +
+      "&city=" +
+      cityObj.city.split(" ").join("%20") +
+      "&offset=0&limit=200&radius=10&sort=relevance",
+    method: "GET",
+    headers: {
+      "x-rapidapi-key": "df5268e97cmshe48e4c9ee315bddp136d9djsnbfac66c2f049",
+      "x-rapidapi-host": "realtor.p.rapidapi.com",
+    },
+  };
+
+  $.ajax(settings).done(function (response) {
+    var count = 0;
+    var total = 0;
+    for (const sold of response.listings) {
+      if (!isNaN(sold.price_raw)) count++;
+      total += sold.price_raw;
+    }
+    var average = (total / count).toFixed(2);
+
+    $("#averageSoldPrice").text("$" + average);
+  });
+}
