@@ -178,7 +178,12 @@ var Locationchange = function (place) {
   getAutoComplete(place);
 };
 
-if (Object.entries(localStorage).length > 3) {
+Locationchange("Denver Colorado");
+
+if (
+  Object.entries(localStorage).length > 3 &&
+  Object.entries(localStorage).length < 8
+) {
   for (x = 0; x < Object.entries(localStorage).length - 2; x++) {
     divAdd = $("<div>");
     divAdd.addClass("divider");
