@@ -36,6 +36,10 @@ span {
   color: black !important;
 }
 
+.displayText {
+  padding: 20px;
+}
+
 #search {
   color: black !important;
 }
@@ -77,11 +81,23 @@ button.focus {
   background-color: white;
 }
 
+.dataDiv {
+  color: black;
+  /* 
+  height: 75%;
+  width: 50%; */
+}
+
 .divider {
   background-color: white;
-
-  height: 75%;
-  width: 50%;
+  /* height: 75%; */
+  /* width: 50%; */
+  color: black;
+}
+.dispDiv {
+  background-color: black;
+  /* height: 75%; */
+  /* width: 50%; */
 }
 
 .section.click {
