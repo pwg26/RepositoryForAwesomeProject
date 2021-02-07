@@ -2,16 +2,8 @@
 
 // addItemSearchHistory("Denver, Co");
 
+// function that uses u.s. census datat to populate fields
 var Locationchange = function (place) {
-  // $(document).ready(function () {
-  //     $('.collapsible').collapsible();
-  //     $('select').formSelect();
-  //     $('.modal').modal();
-  // });
-  //   "https://api.census.gov/data/2019/acs/acs5?get=NAME,B25119_001E&for=place:*&key="
-
-  //api.census.gov/data/2019/acs/acs5?get=NAME,B01001_001E&for=county:*
-
   var APIkey = "9c2fc26375a5e9fb6d689f41066923c3a7eefec6";
   //   //   US Census API  for median houshold income at state level for past 12 monthes
   var queryURL1 =
@@ -149,7 +141,7 @@ var Locationchange = function (place) {
     }
   });
 
-  // us census population api
+  // us census total population api
   var queryURL5 =
     "https://api.census.gov/data/2019/pep/population?get=NAME,POP&for=place:*&in=state:*&key=" +
     APIkey;
@@ -181,7 +173,8 @@ var Locationchange = function (place) {
     }
   });
 
-  // Realator API for auto correct to extract lat and long
+  // uses realator api to populate sold property values over past 200 sold
+
   getAutoComplete(place);
 };
 
@@ -250,83 +243,7 @@ $("#searchForm").on("submit", function (event) {
   Locationchange(place);
 });
 
-// function that addes entries to local storage from user entry, populates the content with the new entry and adds event listener to run ajax call with that users entry
-// $("#saveBtn").on("click", function (event) {
-//   event.preventDefault();
-//   var userInput = $("#search").val();
-//   if (userInput == "") {
-//     return;
-//   }
-
-//   Addedsearches = $("<button>");
-//   Addedsearches.text(userInput);
-
-//   Addedsearches.addClass("btn btn-primary prev-search");
-//   Addedsearches.attr("location", userInput);
-
-//   $("#past-area").prepend(Addedsearches);
-//   $(".prev-search").on("click", function () {
-//     Locationchange($(this).attr("location"));
-//   });
-
-//   Locationchange(userInput);
-// });
-
-// // fuction to populate search history with locally storage values everytime page is re-entered or refreshed from entries in local storage and adds click event to change imput city and run ajax call based off value with user imput
-// function initPast() {
-//   if (Object.entries(localStorage).length > 0) {
-//     for (x = 1; x < Object.entries(localStorage).length + 1; x++) {
-//       var Addedsearches = $("<button>");
-//       Addedsearches.text(localStorage.getItem([x]));
-//       Addedsearches.addClass("btn btn-primary prev-search");
-//       Addedsearches.attr("id", [x] + "memory");
-//       Addedsearches.attr("location", localStorage.getItem([x]));
-//       $("#past-area").prepend(Addedsearches);
-//       $(".prev-search").on("click", function () {
-//         Locationchange($(this).attr("location"));
-//       });
-//     }
-//   }
-// }
-// initPast();
-
-// // function that addes entries to local storage from user entry, populates the content with the new entry and adds event listener to run ajax call with that users entry
-// $("#saveBtn").on("click", function (event) {
-//   event.preventDefault();
-//   var userInput = $("#search").val();
-//   if (userInput == "") {
-//     return;
-//   }
-
-//   Addedsearches = $("<button>");
-//   Addedsearches.text(userInput);
-
-//   Addedsearches.addClass("btn btn-primary prev-search");
-//   Addedsearches.attr("location", userInput);
-
-//   $("#past-area").prepend(Addedsearches);
-//   $(".prev-search").on("click", function () {
-//     Locationchange($(this).attr("location"));
-//   });
-//   localStorage.setItem(Object.entries(localStorage).length + 1, userInput);
-
-//   Locationchange(userInput);
-// });
-
-// function getSearchHistory() {
-//   return JSON.parse(localStorage.getItem("searchHistory")) || [];
-// }
-
-// function addItemSearchHistory(item) {
-//   searchHistory = searchHistory.filter(function (city) {
-//     return city !== item;
-//   });
-
-//   searchHistory.unshift(item);
-//   localStorage.setItem("searchHistory", JSON.stringify(searchHistory));
-// }
-
-// New York City => New%20York%20City
+// function that uses realator api's autocomplete to use the state
 function getAutoComplete(city) {
   const settings = {
     async: true,
@@ -378,6 +295,8 @@ function getPropertyValues(cityObj) {
     }
     var average = (total / count).toFixed(2);
 
-    $("#averageSoldPrice").text("$" + average);
+    $("#averageSoldPrice").text(
+      "Average price sold of past 200 properties: $" + average
+    );
   });
 }

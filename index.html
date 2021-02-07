@@ -45,24 +45,30 @@
           <div class="nav-wrapper z-depth-0 searchBar">
             <form id="searchForm">
               <div class="input-field" id="searchRef">
-                <input placeholder="City, State" id="search" type="search" required />
+                <input
+                  placeholder="City, State"
+                  id="search"
+                  type="search"
+                  required
+                />
                 <label class="label-icon" for="search"
-                  ><i class="material-icons" >search</i></label>
+                  ><i class="material-icons">search</i></label
+                >
                 <i class="material-icons">close</i>
               </div>
             </form>
           </div>
         </nav>
-        
+
         <div class="divider"></div>
         <!-- Search criteria dropdown seletor -->
 
-
         <!-- Search History  -->
-      <div class="col s12 card-panel searchHistory">Search History</div>
-          <div id="input-searches"></div>
+        <div class="col s12 card-panel searchHistory">
+          Search History (past 5)
+        </div>
+        <div id="input-searches"></div>
       </div>
-
 
       <!-- Row 1 Column 2 - Image, modal, search output -->
       <div class="col s12 m8 l9">
@@ -74,9 +80,7 @@
                 <img src="https://via.placeholder.com/500x333" />
                 <!-- img aspect ration 1.499; -->
               </div>
-              <div class="card-content mapData">
-                
-              </div>
+              <div class="card-content mapData"></div>
               <div class="card-action" id="mapExternalLink">
                 <a href="#"></a>
               </div>
@@ -88,21 +92,18 @@
             <div class="col s12 m5">
               <div class="card large displayText">
                 <h3 id="city-name" class="white-text"></h3>
-                <p id ="pop" class="white-text"></p>
+                <p id="pop" class="white-text"></p>
                 <p id="income" class="white-text"></p>
                 <p id="smarts" class="white-text"></p>
                 <p id="age1" class="white-text"></p>
                 <p id="age2" class="white-text"></p>
-                <p id="averageSoldPrice"></p>
-                  
-                </p id= "grade" class=white-text></p>
+                <p id="averageSoldPrice" class="white-text"></p>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-
   </body>
 
   <script type="text/javascript" src="js/materialize.js"></script>
@@ -115,8 +116,5 @@
       $("select").formSelect();
       $(".modal").modal();
     });
-
-
-    
   </script>
 </html>
