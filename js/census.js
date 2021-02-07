@@ -1,3 +1,5 @@
+
+
 // let searchHistory = getSearchHistory();
 
 // addItemSearchHistory("Denver, Co");
@@ -37,6 +39,11 @@ var Locationchange = function (place) {
       $("#income").text(
         "Median Household Income: " + arraymoney[arrayplacecity.indexOf(place)]
       );
+    } else {
+      var loginModal = document.querySelector(".modal")
+      var instance = M.Modal.getInstance(loginModal);
+      instance.open();
+      return
     }
   });
 
