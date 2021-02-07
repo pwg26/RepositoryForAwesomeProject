@@ -4,10 +4,10 @@
 
 // addItemSearchHistory("Denver, Co");
 
-// function that uses u.s. census datat to populate fields
+// function that uses u.s. census datata to populate fields
 var Locationchange = function (place) {
   var APIkey = "9c2fc26375a5e9fb6d689f41066923c3a7eefec6";
-  //   //   US Census API  for median houshold income at state level for past 12 monthes
+  //   //   US Census API  for median household income at state level for past 12 monthes
   var queryURL1 =
     "https://api.census.gov/data/2019/acs/acs5?get=NAME,B25119_001E&for=place:*&in=state:*&key=" +
     APIkey;
@@ -180,12 +180,11 @@ var Locationchange = function (place) {
     }
   });
 
-  // uses realator api to populate sold property values over past 200 sold
+  // uses relator api to populate sold property values over past 200 sold
 
   getAutoComplete(place);
 };
 
-// set default city to denve
 Locationchange("Denver Colorado");
 
 if (
@@ -209,31 +208,9 @@ if (
       Locationchange($(this).attr("location"));
     });
   }
-} else if (Object.entries(localStorage).length > 7) {
-  for (
-    var x = Object.entries(localStorage).length - 7;
-    x < Object.entries(localStorage).length - 2;
-    x++
-  ) {
-    divAdd = $("<div>");
-    divAdd.addClass("divider");
-    divAdd.addClass("section");
-    divAdd.addClass("historyDivs");
-    passedsearch = $("<button>");
-    passedsearch.addClass("section");
-    passedsearch.attr("id", [x] + "memory");
-    passedsearch.attr("location", localStorage.getItem([x]));
-    passedsearchtext = $("<h6>").text(localStorage.getItem([x]));
-    passedsearch.prepend(passedsearchtext);
-    $("#input-searches").prepend(divAdd);
-    $("#input-searches").prepend(passedsearch);
-    $(".section").on("click", function () {
-      Locationchange($(this).attr("location"));
-    });
-  }
 }
 
-// fucntion for user input
+// function for user input
 $("#searchForm").on("submit", function (event) {
   event.preventDefault();
   var userInput = $("#search").val();
@@ -278,7 +255,7 @@ $("#searchForm").on("submit", function (event) {
   Locationchange(place);
 });
 
-// function that uses realator api's autocomplete to use the state
+// function that uses relator api's autocomplete to use the state
 function getAutoComplete(city) {
   const settings = {
     async: true,

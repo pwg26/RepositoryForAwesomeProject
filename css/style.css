@@ -103,7 +103,9 @@ button.focus {
 .section.click {
   background-color: white;
 }
-
+.hide {
+  display: none;
+}
 /* button.hover {
   background-color: white;
 } */
