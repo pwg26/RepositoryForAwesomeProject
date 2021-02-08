@@ -173,14 +173,14 @@ var Locationchange = function (place) {
     }
   });
 
-  // uses realator api to populate sold property values over past 200 sold
-
+  // uses realator api api call to populate sold property values over past 200 sold
   getAutoComplete(place);
 };
 
-// set default city to denve
+// set default city to denver on new page
 Locationchange("Denver Colorado");
 
+// sets search history to past 5 places
 if (
   Object.entries(localStorage).length > 3 &&
   Object.entries(localStorage).length < 8
@@ -292,7 +292,7 @@ function getAutoComplete(city) {
       city: city.city,
       state_code: city.state_code,
     };
-    // addItemSearchHistory(obj);
+
     getPropertyValues(obj);
   });
 }
