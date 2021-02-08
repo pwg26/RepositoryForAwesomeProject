@@ -228,19 +228,4 @@ $(window).on("load", function () {
     });
   };
   init();
-
-  $("#init").click(function () {
-    map.flyTo({ center: center, zoom: zoom }, { form: "fly" });
-  });
-
-  $("#schools").click(function () {
-    var visibility = map.getLayoutProperty("schools", "visibility");
-
-    // toggle layer visibility by changing the layout object's visibility property
-    if (visibility === "visible") {
-      map.setLayoutProperty("schools", "visibility", "none");
-    } else {
-      map.setLayoutProperty("schools", "visibility", "visible");
-    }
-  });
 });

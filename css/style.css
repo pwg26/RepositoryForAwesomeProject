@@ -109,3 +109,11 @@ button.focus {
 /* button.hover {
   background-color: white;
 } */
+
+.mapData {
+  border-radius: 2px;
+  border-color: black;
+  border-bottom: black;
+
+  background-color: #fff9c4;
+}
