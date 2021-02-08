@@ -14,7 +14,7 @@ var Locationchange = function (place) {
     url: queryURL1,
     method: "GET",
   }).then(function (response) {
-    //console.log(response);
+    console.log(response);
 
     var arrayplacecity = [];
     var arraymoney = [];
@@ -179,8 +179,6 @@ var Locationchange = function (place) {
   });
 
   // uses relator api to populate sold property values over past 200 sold
-
-  getAutoComplete(place);
 };
 
 Locationchange("Denver Colorado");
