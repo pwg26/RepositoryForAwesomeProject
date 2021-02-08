@@ -1,5 +1,5 @@
 # Urban El Dorado
-# Developed By Joey Davidson, Pierce Gladfelter, Stephen Pacyga, and Charles Zoeller
+### Developed By Joey Davidson, Pierce Gladfelter, Stephen Pacyga, and Charles Zoeller
 Introduction:
 This repository contains a type of location evaluator that uses a user’s location input to return a map and a fact sheet containing information based on the searched location. A realtor API and an API from the U.S. census bureau were used to generate the fact sheet, while the API MapBox was used for the interactive map.
 
