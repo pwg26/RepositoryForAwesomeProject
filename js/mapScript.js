@@ -166,11 +166,15 @@ $(window).on("load", function () {
     }).then(function (response) {
       var bounds = [lat, lat, long, long];
       $(".mapData").empty();
+      var list = $("<ol>");
+      $(".mapData").append(
+        $("<h5>").text("5 Closest Schools").attr("style", "text-align: center")
+      );
       response.features.forEach(function (school) {
         //console.log(school.place_name);
         schoolLoc.push(school.center);
 
-        $(".mapData").append($("<p>").text(school.place_name));
+        list.append($("<li>").text(school.place_name));
 
         if (school.center[1] > bounds[3]) {
           bounds[3] = school.center[1];
@@ -185,6 +189,7 @@ $(window).on("load", function () {
           bounds[0] = school.center[0];
         }
       });
+      $(".mapData").append(list);
       //console.log(bounds);
       tempCity = city;
       map.fitBounds(bounds, { padding: 45 }, { form: "fit" });
